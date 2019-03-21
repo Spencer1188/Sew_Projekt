@@ -6,7 +6,9 @@
 require_once 'dbconfig.php';
  
 //Get Operation
+header('Content-Type: text/plain');
 
+if(isset($_GET["op"])){
 $todo = $_GET["op"];
 	
 if($todo == "all"){
@@ -33,21 +35,25 @@ if($todo == "all"){
 	
 		$day = $_GET["day"];
 		$items = array(); 
-		$sql = "SELECT count(*) FROM items where date=$day;";
+		$sql = "SELECT count(*),date FROM items where date=$day group by date;";
 
 		$stmt = $conn->prepare($sql);
 		$stmt->execute();
-		$stmt->bind_result($anz);
+		$stmt->bind_result($anz,$date);
 
 		while($stmt->fetch()){
 
 		$temp = [ 
 			'anz'=>$anz,
-			'date'=>$day
+			'date'=>$date
 		];
 		array_push($items, $temp);
 		}
 		echo json_encode($items);	
+}
+	
+}else{
+	echo "Use Api";
 }
 
 

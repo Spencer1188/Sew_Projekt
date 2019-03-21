@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "projekt_storage";
+$username = "webadmin";
+$password = "htl";
+$dbname = "projekt_sew";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

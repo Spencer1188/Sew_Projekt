@@ -17,27 +17,6 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Datenbank: `projekt_sew`
---
-CREATE DATABASE IF NOT EXISTS `projekt_sew` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `projekt_sew`;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `items`
---
-
-CREATE TABLE `items` (
-  `id` int(11) NOT NULL,
-  `prefix` varchar(100) DEFAULT NULL,
-  `token` text NOT NULL,
-  `name` text,
-  `price` varchar(100) DEFAULT '',
-  `isscanned` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
 -- Daten für Tabelle `items`
 --
 

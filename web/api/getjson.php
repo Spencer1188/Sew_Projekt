@@ -3,7 +3,7 @@
 require_once 'dbconfig.php';
 $token = 'maxserver';
 
-
+if( isset($_POST['token']) and $_POST['prefix']){
 //Retrieve the data.
 $prefix = $_POST['prefix'];
 $ean = $_POST['token'];
@@ -15,6 +15,7 @@ $productName = $response->product->name;
 $date = date("dmY");
 
 //Sql insert db
+
 $sql = "INSERT INTO items (prefix,token,name,date) VALUES ('$prefix','$ean','$productName','$date')";
 
 if ($conn->query($sql) === TRUE) {
@@ -22,7 +23,9 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
-
+}else{
+	echo "Use API!";
+}
 $conn->close();
 
 ?>
