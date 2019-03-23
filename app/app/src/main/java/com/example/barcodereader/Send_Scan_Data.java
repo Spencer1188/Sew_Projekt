@@ -27,7 +27,7 @@ public class Send_Scan_Data extends AsyncTask<String, Void, String> {
         try
         {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("https://mgoeckler.ddns.net/sew-web/getjson.php");
+            HttpPost httppost = new HttpPost("https://mgoeckler.ddns.net/sew-web/api/getjson.php");
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             Log.e("log_tag", "OKK:  "+response.getStatusLine().toString());

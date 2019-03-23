@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         scanBtn.setOnClickListener(this);
         reloaditems.setOnClickListener(this);
 
-        getJSON("https://mgoeckler.ddns.net/sew-web/sendjson.php");
 
     }
 
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
 
         if(v.getId()==R.id.ReloadList_button){
-            getJSON("https://mgoeckler.ddns.net/sew-web/sendjson.php");
             Log.d("click","ok");
         }
     }
@@ -70,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             contentTxt.setText("CONTENT: " + scanContent);
 
             sendAccelerationData(scanFormat,scanContent);
-            getJSON("https://mgoeckler.ddns.net/sew-web/sendjson.php");
         }
         else{
             formatTxt.setText("Error");
@@ -82,59 +79,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         Send_Scan_Data r = new Send_Scan_Data();
         r.execute(id,name);
     }
-
-    private void getJSON(final String urlWebService) {
-
-        class GetJSON extends AsyncTask<Void, Void, String> {
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                try {
-                    loadIntoListView(s);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            protected String doInBackground(Void... voids) {
-                try {
-                    URL url = new URL(urlWebService);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    StringBuilder sb = new StringBuilder();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                    String json;
-                    while ((json = bufferedReader.readLine()) != null) {
-                        sb.append(json + "\n");
-                    }
-                    return sb.toString().trim();
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-        }
-        GetJSON getJSON = new GetJSON();
-        getJSON.execute();
-    }
-
-    private void loadIntoListView(String json) throws JSONException {
-        JSONArray jsonArray = new JSONArray(json);
-        String[] items = new String[jsonArray.length()];
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i);
-            items[i] = obj.getString("name");
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        List.setAdapter(arrayAdapter);
-    }
-
 
 }
 

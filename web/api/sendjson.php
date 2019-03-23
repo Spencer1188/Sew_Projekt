@@ -34,22 +34,61 @@ if($todo == "all"){
 }else if($todo== "daybyday"){
 	
 		$day = $_GET["day"];
-		$items = array(); 
-		$sql = "SELECT count(*),date FROM items where date=$day group by date;";
+		$restdate = $_GET["date"];
+		$items = array();
+		$date = $day . "" . $restdate;
 
+	for($i=0;$i<6;$i++){
+		$sql = "SELECT count(*),date FROM items where date=$date group by date;";
+		
 		$stmt = $conn->prepare($sql);
 		$stmt->execute();
 		$stmt->bind_result($anz,$date);
-
-		while($stmt->fetch()){
-
-		$temp = [ 
-			'anz'=>$anz,
-			'date'=>$date
-		];
-		array_push($items, $temp);
+		$stmt->fetch();
+		if($stmt->fetch()){
+			$temp = [ 
+				0
+			];
+			array_push($items, $temp);
+		}else{
+			$temp = [ 
+				$anz
+				];
+				array_push($items, $temp);
 		}
+			$day = $day+1;
+			$date = $day . "" . $restdate;
+		
+		}	
+
 		echo json_encode($items);	
+}else if($todo== "itemsday"){
+	$date = $_GET["day"];
+	
+		$items = array();
+		$labels = array();
+		$itemsanz = array();
+		$sql = "SELECT count(*),name FROM items where date=$date group by token;";
+		
+		$stmt = $conn->prepare($sql);
+		$stmt->execute();
+		$stmt->bind_result($anz,$name);
+	
+		while($stmt->fetch()){
+				$temp1 = [ 
+					$anz
+				];
+			
+				$temp2 = [ 
+					$name
+				];
+				array_push($itemsanz, $temp1);
+				array_push($labels, $temp2);
+		}
+	
+		array_push($items,$itemsanz);
+		array_push($items,$labels);
+		echo json_encode($items);
 }
 	
 }else{
