@@ -1,4 +1,14 @@
 <!doctype html>
+<?php 
+	session_start();
+	$id = $_SESSION["id"];
+
+echo "
+   <script type=\"text/javascript\"><!--
+ 	var usrid = \"".$id."\";
+   </script>
+ ";
+?>
 <html>
 <head>
 <meta charset="utf-8">
@@ -13,7 +23,7 @@
   <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="#">Link 1</a>
+      <a class="nav-link" href="asserts/php/logout.php">Logout</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Link 2</a>
@@ -51,8 +61,8 @@
 </body>
 	<script>
 	window.onload = function () {
-		getValBuys();
-		drawchartitems();
+		getValBuys(usrid);
+		drawchartitems(usrid);
     }
 			var chartitems;
 			var d = new Date();
@@ -63,7 +73,7 @@
 			}
 			var date = d.getDate() + "" + month + "" + d.getFullYear();
 		
-	function getValBuys(){
+	function getValBuys(usrid){
 		var d = new Date();
 		if((d.getMonth()+1) < 9){
 			month = "0"+(d.getMonth()+1);
@@ -73,7 +83,7 @@
 		var minday = d.getDate()-4 
 		var date = month + "" + d.getFullYear();
 
-		const url = "api/sendjson.php?op=daybyday&day="+minday+"&date="+date;
+		const url = "api/sendjson.php?op=daybyday&day="+minday+"&date="+date+"&usrid="+usrid;
 			$.ajax({
 				url: url,
 				contentType: "application/json",
@@ -127,7 +137,7 @@
 		}
 		
 		function getchartitems(date){
-			const url = "api/sendjson.php?op=itemsday&day="+date;
+			const url = "api/sendjson.php?op=itemsday&day="+date+"&usrid="+usrid;
 			$.ajax({
 				url: url,
 				contentType: "application/json",

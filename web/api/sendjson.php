@@ -34,12 +34,13 @@ if($todo == "all"){
 }else if($todo== "daybyday"){
 	
 		$day = $_GET["day"];
+		$id = $_GET["usrid"];
 		$restdate = $_GET["date"];
 		$items = array();
 		$date = $day . "" . $restdate;
 
 	for($i=0;$i<6;$i++){
-		$sql = "SELECT count(*),date FROM items where date=$date group by date;";
+		$sql = "SELECT count(*),date FROM items where date=$date and usr_id=$id group by date;";
 		
 		$stmt = $conn->prepare($sql);
 		$stmt->execute();
@@ -64,13 +65,14 @@ if($todo == "all"){
 		echo json_encode($items);	
 }else if($todo== "itemsday"){
 		$date = $_GET["day"];
+		$id = $_GET["usrid"];
 		$background_colors = array('#e53935', '#90caf9', '#a5d6a7', '##cddc39', '#ff9800');
 	
 		$items = array();
 		$labels = array();
 		$color = array();
 		$itemsanz = array();
-		$sql = "SELECT count(*),name FROM items where date=$date group by token;";
+		$sql = "SELECT count(*),name FROM items where date=$date and usr_id=$id group by token;";
 		
 		$stmt = $conn->prepare($sql);
 		$stmt->execute();

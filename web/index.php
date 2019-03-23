@@ -16,19 +16,18 @@
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+      <!--<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
     </div>
 
-    <!-- Login Form -->
-    <form>
+
       <input type="email" id="email" class="fadeIn second" name="login" placeholder="Email">
       <input type="text" id="password" class="fadeIn third" name="login" placeholder="Password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
-    </form>
+      <input type="submit" class="fadeIn fourth" value="Log In" onClick="do_login()">
 
-<div class="alert alert-danger" role="alert" style="display:inherit;">
-  A simple danger alert—check it out!
-</div>
+
+	<div class="alert alert-danger no-visible-error" role="alert" id="error-alert">
+		<p id="error"></p>
+	</div>
 
   </div>
 </div>
@@ -51,12 +50,15 @@
 			  type:'post',
 			  url:'asserts/php/do_login.php',
 			  data:{
-			   username:usr,
+			   mail:email,
 			   pw:pass
 			  },
 			  success:function(data) {
 				  if(data == "error"){
-					 myFunction()
+					 $("#error-alert").removeClass("no-visible-error");
+					 $("#error-alert").addClass("visible-error");
+					  $("#error").text("Email oder Passwort falsch!");
+					 
 				  }else{
 					 window.location.href = "mainface.php";
 				  }

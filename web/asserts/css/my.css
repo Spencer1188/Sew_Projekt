@@ -67,6 +67,13 @@ h2 {
 
 
 /* TABS */
+.no-visible-error{
+	display: none;
+}
+
+.visible-error{
+	display: inherit;
+}
 
 h2.inactive {
   color: #cccccc;
