@@ -63,17 +63,19 @@ if($todo == "all"){
 
 		echo json_encode($items);	
 }else if($todo== "itemsday"){
-	$date = $_GET["day"];
+		$date = $_GET["day"];
+		$background_colors = array('#e53935', '#90caf9', '#a5d6a7', '##cddc39', '#ff9800');
 	
 		$items = array();
 		$labels = array();
+		$color = array();
 		$itemsanz = array();
 		$sql = "SELECT count(*),name FROM items where date=$date group by token;";
 		
 		$stmt = $conn->prepare($sql);
 		$stmt->execute();
 		$stmt->bind_result($anz,$name);
-	
+		$i = 0;
 		while($stmt->fetch()){
 				$temp1 = [ 
 					$anz
@@ -82,12 +84,18 @@ if($todo == "all"){
 				$temp2 = [ 
 					$name
 				];
+				$temp3 = [ 
+					$background_colors[$i]
+				];
+				$i++;
 				array_push($itemsanz, $temp1);
 				array_push($labels, $temp2);
+				array_push($color, $temp3);
 		}
 	
 		array_push($items,$itemsanz);
 		array_push($items,$labels);
+		array_push($items,$color);
 		echo json_encode($items);
 }
 	
