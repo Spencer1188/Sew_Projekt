@@ -9,21 +9,31 @@
 	  	<link type="text/css" rel="stylesheet" href="asserts/css/my.css">
   </head>
 
-  <body>
+  <body class="abstract-bg">
+	<div class="navbar transparent navbar-inverse">
+            <div class="navbar-inner">
+				<div class="container">
+					<a>Sign Up</a>
+				</div>
+	</div>
+	</div>  
 <div class="wrapper fadeInDown">
+		
   <div id="formContent">
     <!-- Tabs Titles -->
 
     <!-- Icon -->
-    <div class="fadeIn first">
+    <div class="fadeIn first" style="padding: 20px">
+		<h1 class="headermain">Ihr Einkaufsmanager</h1>
       <!--<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
     </div>
 
 
       <input type="email" id="email" class="fadeIn second" name="login" placeholder="Email">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="Password">
-      <input type="submit" class="fadeIn fourth" value="Log In" onClick="do_login()">
-
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password">
+      <input class="btn btn-primary" onClick="do_login()" type="submit"><br><br>
+	
+	  
 
 	<div class="alert alert-danger no-visible-error" role="alert" id="error-alert">
 		<p id="error"></p>

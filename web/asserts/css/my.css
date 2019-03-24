@@ -1,5 +1,6 @@
 
 /* BASIC */
+@import url('https://fonts.googleapis.com/css?family=Teko');
 
 html {
   background-color: #56baed;
@@ -27,6 +28,15 @@ h2 {
   color: #cccccc;
 }
 
+.headermain{
+	font-family: 'Teko', sans-serif;
+}
+
+.abstract-bg{
+	background-image: url("../../images/bg/main.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
 
 
 /* STRUCTURE */
@@ -39,6 +49,7 @@ h2 {
   width: 100%;
   min-height: 100%;
   padding: 20px;
+  margin: -40px 0px;
 }
 
 #formContent {
@@ -122,7 +133,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=text],input[type=email] {
+input[type=password],input[type=email] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -130,7 +141,7 @@ input[type=text],input[type=email] {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 22px;
   margin: 5px;
   width: 85%;
   border: 2px solid #f6f6f6;
@@ -141,18 +152,27 @@ input[type=text],input[type=email] {
   transition: all 0.5s ease-in-out;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
+	font-family: 'Teko';
 }
 
-input[type=text]:focus,input[type=email]:focus {
+input[type=password]:focus,input[type=email]:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder,input[type=email]:placeholder {
+input[type=password]:placeholder,input[type=email]:placeholder {
   color: #cccccc;
 }
 
-
+ .navbar.transparent.navbar-inverse .navbar-inner {
+    border-width: 0px;
+    -webkit-box-shadow: 0px 0px;
+    box-shadow: 0px 0px;
+    background-color: rgba(0,0,0,0.0);
+    background-image: -webkit-gradient(linear, 50.00% 0.00%, 50.00% 100.00%, color-stop( 0% , rgba(0,0,0,0.00)),color-stop( 100% , rgba(0,0,0,0.00)));
+    background-image: -webkit-linear-gradient(270deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+    background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+}
 
 /* ANIMATIONS */
 

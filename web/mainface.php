@@ -43,7 +43,7 @@ echo "
     <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
   </p>
 </div>
-	<section id="widget-chart-day">
+	<section id="widget-chart-day" class="container">
 		<div class="row" >
 			<div class="col-6">
 				<canvas id="chart-day"></canvas>
