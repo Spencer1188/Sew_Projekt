@@ -1,0 +1,18 @@
+APP
+
+- Login erstellen
+- Einkauf-Charts erstellen
+- Einkaufsliste erstellen
+- Falsch gescannte Artikeln ändern direkt nach dem scannen
+
+Web
+
+- Regestrierformular erstellen
+- Monatsübersicht erstellen (Chart)
+- Einkäufe an gewissen Tagen ansehen
+- Bei den Tages und Monatschart vor und zurück wechseln können
+- Falsch gescannte Artikeln ändern
+
+Allgemein
+
+- Logo erstellen
