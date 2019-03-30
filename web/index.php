@@ -10,13 +10,19 @@
   </head>
 
   <body class="abstract-bg">
-	<div class="navbar transparent navbar-inverse">
-            <div class="navbar-inner">
-				<div class="container">
-					<a>Sign Up</a>
-				</div>
-	</div>
-	</div>  
+<nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
+    <a href="/" class="navbar-brand d-flex w-50 mr-auto">LOGO</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="register.php">Regestrieren</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <div class="wrapper fadeInDown">
 		
   <div id="formContent">
@@ -31,7 +37,7 @@
 
       <input type="email" id="email" class="fadeIn second" name="login" placeholder="Email">
       <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password">
-      <input class="btn btn-primary" onClick="do_login()" type="submit"><br><br>
+	  <button onClick="do_login()" type="submit">Login</button><br><br>
 	
 	  
 
@@ -48,6 +54,8 @@
 
   </body>
 <script>
+	
+	
 	function do_login(){
 		
 		 var email=$("#email").val();
@@ -82,5 +90,6 @@
 		 } 
 
 		}
+	
 	</script>
 </html>

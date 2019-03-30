@@ -33,36 +33,49 @@ if($todo == "all"){
 		echo json_encode($items);			
 }else if($todo== "daybyday"){
 	
-		$day = $_GET["day"];
-		$id = $_GET["usrid"];
-		$restdate = $_GET["date"];
+		//$id = $_GET["usrid"];
+		$id="1";
+		$date = $_GET["date"];
+		$rdate = new DateTime($date);
+		
+		$labels = array();
 		$items = array();
-		$date = $day . "" . $restdate;
-
-	for($i=0;$i<6;$i++){
-		$sql = "SELECT count(*),date FROM items where date=$date and usr_id=$id group by date;";
+		$arr = array();
+	
+	for($i=0;$i<5;$i++){
+		$d = $rdate->format('dmY');
+		$sql = "SELECT count(*),date FROM items where date='$d' and usr_id='$id' group by date;";
 		
 		$stmt = $conn->prepare($sql);
 		$stmt->execute();
 		$stmt->bind_result($anz,$date);
-		$stmt->fetch();
+		
 		if($stmt->fetch()){
-			$temp = [ 
-				0
+			$temp1 = [ 
+				$anz
 			];
-			array_push($items, $temp);
+			$temp2 = [ 
+				$date
+			];
+				array_push($labels, $temp2);
+				array_push($items, $temp1);
 		}else{
-			$temp = [ 
+			$temp1 = [ 
 				$anz
 				];
-				array_push($items, $temp);
+			$temp2 = [ 
+				$date
+				];
+				array_push($labels, $temp2);
+				array_push($items, $temp1);
 		}
-			$day = $day+1;
-			$date = $day . "" . $restdate;
+			$rdate->modify('-1 day'); 
 		
 		}	
-
-		echo json_encode($items);	
+		array_push($arr, $labels);
+		array_push($arr, $items);
+		echo json_encode($arr);
+	
 }else if($todo== "itemsday"){
 		$date = $_GET["day"];
 		$id = $_GET["usrid"];
