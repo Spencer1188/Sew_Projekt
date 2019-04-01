@@ -14,6 +14,7 @@ echo "
 <meta charset="utf-8">
 <title>Einkaufsliste</title>
 	<link type="text/css" rel="stylesheet" href="asserts/css/bootstrap.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -45,10 +46,18 @@ echo "
 </div>
 	<section id="widget-chart-day" class="container">
 		<div class="row" >
-			<div class="col-6">
+			<div class="col-6 text-center">
+				<h1>Tagesansicht</h1>
 				<canvas id="chart-day"></canvas>
+				<button onClick="last()" class="btn btn-outline-dark">
+					<i class="fas fa-arrow-left"></i>
+				</button>
+				<button onClick="next()" class="btn btn-outline-dark">
+					<i class="fas fa-arrow-right"></i>
+				</button>
 			</div>
 			<div class="col-6">
+				<h1 style="color: white">Info</h1>
 				<canvas id="chart-items"></canvas>
 			</div>
 		</div>
@@ -64,58 +73,102 @@ echo "
 	<script src="asserts/js/bootstrap.js"></script>
 	<script src="asserts/js/jquery.js"></script>
 	<script src="asserts/js/chart.js"></script>
+	<script src="asserts/js/datejs.js"></script>
 	<script src="asserts/js/my-main.js"></script>
 </body>
 	<script>
-			// Set Date
-			var d = new Date();
-			if((d.getMonth()+1) < 9){
-				month = "0"+(d.getMonth()+1);
-			}else{
-				month = (d.getMonth()+1);
-			}
-			var date = d.getDate() + "" + month + "" + d.getFullYear();
-		
-	//Set Charts
-	window.onload = function () {
-		DrawChartDays(usrid);	
-    }
-
-
-			
-// Draw Chart for the 5 Days		
-	function DrawChartDays(usrid){
+		var chartday;
 		var d = new Date();
 		if((d.getMonth()+1) < 9){
 			month = "0"+(d.getMonth()+1);
 		}else{
 			month = (d.getMonth()+1);
 		}
-		var minday = d.getDate()-4 
-		var date = month + "" + d.getFullYear();
+		if(d.getDate() < 9){
+			day = "0"+d.getDate();
+		}else{
+			day = d.getDate();
+		}
+		var date = d.getFullYear() + "-" + month + "-" + day;
+		var tmpdate = new Date(date);
+		
+	
+	//Set Charts
+	window.onload = function () {
+		DrawChartDays(usrid,0);	
 
-		const url = "api/sendjson.php?op=daybyday&day="+minday+"&date="+date+"&usrid="+usrid;
+    }
+
+	function last(){
+		DrawChartDays(usrid,1);
+	}
+		
+	function next(){
+		DrawChartDays(usrid,2);
+	}
+			
+// Draw Chart for the 5 Days		
+	function DrawChartDays(usrid,val){
+	
+		if(val == 1){
+				d.setDate(d.getDate() - 1);
+				if((d.getMonth()+1) < 9){
+					month = "0"+(d.getMonth()+1);
+				}else{
+					month = (d.getMonth()+1);
+				}
+				if(d.getDate() < 9){
+					day = "0"+d.getDate();
+				}else{
+					day = d.getDate();
+				}
+				date = d.getFullYear() + "-" + month + "-" + day;
+		}
+		
+		if(val == 2){
+				d.setDate(d.getDate() + 1);
+				if((d.getMonth()+1) < 9){
+					month = "0"+(d.getMonth()+1);
+				}else{
+					month = (d.getMonth()+1);
+				}
+				if(d.getDate() < 9){
+					day = "0"+d.getDate();
+				}else{
+					day = d.getDate();
+				}
+				date = d.getFullYear() + "-" + month + "-" + day;
+		}
+		
+		if(val == 1 || val == 2){
+						chartday.reset();
+		}
+		
+		const url = "api/sendjson.php?op=daybyday&date="+date+"&usrid="+usrid;
 			$.ajax({
 				url: url,
 				contentType: "application/json",
 				dataType: 'json',
 				success: function(result){
-					
+
 					var ctxday = document.getElementById("chart-day");
-					var chartday = new Chart(ctxday,{
+					chartday = new Chart(ctxday,{
 					// The type of chart we want to create
 					type: 'line',
 					// The data for our dataset
 					data: {
-						labels: [getdatesub(4),getdatesub(3), getdatesub(2), getdatesub(1), date, getdateadd(1)],
+						labels: result[0].reverse(),
 						datasets: [{
 							label: 'Einkäufe',
 							backgroundColor: '#42a5f5',
 							borderColor: '#42a5f5',
-							data: result
+							data: result[1].reverse()
 						}]
 					},
 					});
+					if(val == 1 || val == 2){
+						chartday.update();
+					}
 						//Show Items on onclick a Point of the Chart Item
 						ctxday.onclick = function(evt){
 						var activePoints = chartday.getElementsAtEvent(evt);
@@ -175,65 +228,7 @@ echo "
 			});
 			
 		}
-// Draws the Month Chart
-	function DrawChartDays(usrid){
-		var d = new Date();
-		if((d.getMonth()+1) < 9){
-			month = "0"+(d.getMonth()+1);
-		}else{
-			month = (d.getMonth()+1);
-		}
-		var date = d.getFullYear() + "-" + month + "-" + d.getDate();
 
-		const url = "api/sendjson.php?op=daybyday&date="+date+"&usrid="+usrid;
-			$.ajax({
-				url: url,
-				contentType: "application/json",
-				dataType: 'json',
-				success: function(result){
-					result[0].reverse();
-					var ctxday = document.getElementById("chart-day");
-					var chartday = new Chart(ctxday,{
-					// The type of chart we want to create
-					type: 'line',
-					// The data for our dataset
-					data: {
-						labels: result[0],
-						datasets: [{
-							label: 'Einkäufe',
-							backgroundColor: '#42a5f5',
-							borderColor: '#42a5f5',
-							data: result[1]
-						}]
-					},
-					});
-						//Show Items on onclick a Point of the Chart Item
-						ctxday.onclick = function(evt){
-						var activePoints = chartday.getElementsAtEvent(evt);
-
-						if (activePoints[0]) {
-							var chartData = activePoints[0]['_chart'].config.data;
-							var idx = activePoints[0]['_index'];
-							var seldate = chartData.labels[idx];
-
-							if (typeof chartitems !== 'undefined') {
-								// variable is undefined
-								chartitems.data.labels.pop();
-								chartitems.data.datasets.pop()
-								chartitems.update();
-							}
-							getchartitems(seldate);
-						  }
-						}
-				},
-				error: function(thrownError){
-					alert("error");
-				}
-				
-			});
-		
-
-		  }
 
 </script>
 </html>
