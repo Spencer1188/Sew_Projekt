@@ -113,8 +113,54 @@ if($todo == "all"){
 		array_push($items,$labels);
 		array_push($items,$color);
 		echo json_encode($items);
-}
+}else if($todo == "monthbymonth"){
+		$date = $_GET["date"];
+		$id = $_GET["usrid"];
+		$rdate = new DateTime($date);
+		
+		$labels = array();
+		$items = array();
+		$arr = array();
 	
+	for($i=0;$i<5;$i++){
+		$d = $rdate->format('mY');
+		
+		$sql = "SELECT count(*) as anz FROM `items` where date like '%$d'";	
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+			// output data of each row
+			while($row = $result->fetch_assoc()) {
+					$temp1 = [ 
+						$row["anz"]
+					];
+					$temp2 = [ 
+						$rdate->format('mY')
+					];
+						array_push($labels, $temp2);
+						array_push($items, $temp1);
+				}
+		} else {
+					$temp1 = [ 
+						0
+					];
+					$temp2 = [ 
+						$rdate->format('m')
+					];
+						array_push($labels, $temp2);
+						array_push($items, $temp1);
+		}
+		
+	
+			$rdate->modify('-1 month'); 
+		}	
+	
+		array_push($arr, $labels);
+		array_push($arr, $items);
+		echo json_encode($arr);
+	
+	
+}
 }else{
 	echo "Use Api";
 }
