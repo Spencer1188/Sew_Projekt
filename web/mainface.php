@@ -71,6 +71,10 @@ echo "
 					<i class="fas fa-arrow-right"></i>
 				</button>
 			</div>
+			<div class="col-lg-6 text-center">
+				<h1>Meist gekaufte Artikel</h1>
+				<canvas id="chart-most"></canvas>
+			</div>
 		</div>
 	</section>
 	<br><br><br>
@@ -102,6 +106,7 @@ echo "
 	window.onload = function () {
 		DrawChartDays(usrid,0);	
 		DrawChartMonth(usrid,0);
+		DrawChartMost(usrid);
 
     }
 
@@ -328,6 +333,38 @@ echo "
 		
 
 		  }
+			
+		function DrawChartMost(usrid){
+			const url = "api/sendjson.php?op=most&usrid="+usrid;
+			$.ajax({
+				url: url,
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(result){
+
+					var ctxmost = document.getElementById("chart-most");
+					var myBarChart = new Chart(ctxmost, {
+						type: 'bar',
+						data: {
+						  labels: result[0],
+						  datasets: [
+							{
+							  label: "Artikelmenge",
+							  backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+							  data: result[1]
+							}
+						  ]
+						}
+					});
+					
+				},
+				error: function(thrownError){
+					alert("error");
+				}
+				
+			});
+		}
+		
 		
 function getDateMonthsBefore(date,nofMonths) {
     var thisMonth = date.getMonth();
