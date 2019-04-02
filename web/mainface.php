@@ -343,10 +343,14 @@ function getDateMonthsBefore(date,nofMonths) {
 		
 function getDateMonthsAfter(date,nofMonths) {
     var thisMonth = date.getMonth();
+    var. thisYear = date.getFullYear();
     date.setMonth(thisMonth + nofMonths);
+
     if ((thisMonth + nofMonths > 11) && (date.getMonth() != (thisMonth - nofMonths))) {
-        date.setDate(0);
-        alert("i am here: currentDate:" + date);
+       date.setMonth(0);
+       date.setFullYear(date.getFullYear()+1);
+        /* date.setDate(0);
+        alert("i am here: currentDate:" + date);*/
     } else if ((thisMonth + nofMonths <= 11) && (date.getMonth() != (thisMonth + nofMonths))) {
         date.setDate(0);
     }
