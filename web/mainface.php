@@ -348,7 +348,6 @@ function getDateMonthsAfter(date,nofMonths) {
     if ((thisMonth + nofMonths > 11) && (date.getMonth() != (thisMonth - nofMonths))) {
        date.setMonth(0);
        date.setFullYear(thisYear+1);
-       alert("date: " + date);
         /* date.setDate(0);
         alert("i am here: currentDate:" + date);*/
     } else if ((thisMonth + nofMonths <= 11) && (date.getMonth() != (thisMonth + nofMonths))) {

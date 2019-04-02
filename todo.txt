@@ -7,10 +7,8 @@ APP
 
 Web
 
-- Regestrierformular erstellen
-- Monatsübersicht erstellen (Chart)
+- Monatsübersicht buggy - reparieren (Chart)
 - Einkäufe an gewissen Tagen ansehen
-- Bei den Tages und Monatschart vor und zurück wechseln können
 - Falsch gescannte Artikeln ändern
 
 Allgemein
