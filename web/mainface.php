@@ -48,6 +48,9 @@ echo "
 				<canvas id="chart-day"></canvas>
 				<button onClick="last_day()" class="btn btn-outline-dark">
 					<i class="fas fa-arrow-left"></i>
+				</button>				
+				<button onClick="reset_day()" class="btn btn-outline-dark">
+					<i class="fas fa-undo"></i>
 				</button>
 				<button onClick="next_day()" class="btn btn-outline-dark">
 					<i class="fas fa-arrow-right"></i>
@@ -67,6 +70,9 @@ echo "
 				<button onClick="last_month()" class="btn btn-outline-dark">
 					<i class="fas fa-arrow-left"></i>
 				</button>
+				<button onClick="reset_month()" class="btn btn-outline-dark">
+					<i class="fas fa-undo"></i>
+				</button>
 				<button onClick="next_month()" class="btn btn-outline-dark">
 					<i class="fas fa-arrow-right"></i>
 				</button>
@@ -81,7 +87,6 @@ echo "
 	<script src="asserts/js/bootstrap.js"></script>
 	<script src="asserts/js/jquery.js"></script>
 	<script src="asserts/js/chart.js"></script>
-	<script src="asserts/js/datejs.js"></script>
 	<script src="asserts/js/my-main.js"></script>
 </body>
 	<script>
@@ -101,6 +106,7 @@ echo "
 		}
 		var date = d.getFullYear() + "-" + month + "-" + day;
 		var datem = d.getFullYear() + "-" + month + "-" + day;
+		const aktdate = d.getFullYear() + "-" + month + "-" + day;
 	
 	//Set Charts
 	window.onload = function () {
@@ -124,6 +130,14 @@ echo "
 		
 	function next_month(){
 		DrawChartMonth(usrid,2);
+	}
+		
+	function reset_day(){
+		DrawChartDays(usrid,3);
+	}
+			
+	function reset_month(){
+		DrawChartMonth(usrid,3);
 	}
 			
 // Draw Chart for the 5 Days		
@@ -159,7 +173,10 @@ echo "
 				date = d.getFullYear() + "-" + month + "-" + day;
 		}
 		
-			if(val == 1 || val == 2){
+		if(val == 3){
+				date = aktdate;
+		}
+			if(val == 1 || val == 2 || val == 3){
 				chartday.reset();
 			}
 		
@@ -184,8 +201,17 @@ echo "
 							data: result[1].reverse()
 						}]
 					},
+					options: {
+						scales: {
+							yAxes: [{
+								ticks: {
+									beginAtZero:true
+								}
+							}]
+						}
+					}
 					});
-					if(val == 1 || val == 2){
+					if(val == 1 || val == 2 || val == 3){
 						chartday.update();
 					}
 						//Show Items on onclick a Point of the Chart Item
@@ -248,7 +274,7 @@ echo "
 			
 		}
 		
-		function DrawChartMonth(usrid,val){
+	function DrawChartMonth(usrid,val){
 	
 		if(val == 1){
 				m = new Date(getDateMonthsBefore(m,1));
@@ -280,6 +306,14 @@ echo "
 				datem = m.getFullYear() + "-" + month + "-" + day;
 		}
 		
+		if(val == 3){
+				datem = aktdate;
+		}
+		
+		if(val == 1 || val == 2 || val == 3){
+			chartmonth.reset();
+		}
+		
 		
 		const url = "api/sendjson.php?op=monthbymonth&date="+datem+"&usrid="+usrid;
 			$.ajax({
@@ -292,6 +326,7 @@ echo "
 					chartmonth = new Chart(ctxday,{
 					// The type of chart we want to create
 					type: 'line',
+					
 					// The data for our dataset
 					data: {
 						labels: result[0].reverse(),
@@ -301,29 +336,20 @@ echo "
 							borderColor: '#42a5f5',
 							data: result[1].reverse()
 						}]
-					},
-					});
-					if(val == 1 || val == 2){
-						chartday.update();
-					}
-						//Show Items on onclick a Point of the Chart Item
-						ctxday.onclick = function(evt){
-						var activePoints = chartday.getElementsAtEvent(evt);
-
-						if (activePoints[0]) {
-							var chartData = activePoints[0]['_chart'].config.data;
-							var idx = activePoints[0]['_index'];
-							var seldate = chartData.labels[idx];
-
-							if (typeof chartitems !== 'undefined') {
-								// variable is undefined
-								chartitems.data.labels.pop();
-								chartitems.data.datasets.pop()
-								chartitems.update();
-							}
-							getchartitems(seldate);
-						  }
+					},				
+					options: {
+						scales: {
+							yAxes: [{
+								ticks: {
+									beginAtZero:true
+								}
+							}]
 						}
+					}
+					});
+					if(val == 1 || val == 2 || val == 3){
+						chartmonth.update();
+					}
 				},
 				error: function(thrownError){
 					alert("error");

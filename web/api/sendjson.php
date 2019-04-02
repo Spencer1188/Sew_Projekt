@@ -122,6 +122,20 @@ if($todo == "all"){
 		$items = array();
 		$arr = array();
 	
+	$monate = array(
+				"Jan"=>"Januar",
+                "Feb"=>"Februar",
+                "Mar"=>"März",
+                "Apr"=>"April",
+                "May"=>"Mai",
+                "Jun"=>"Juni",
+                "Jul"=>"Juli",
+                "Aug"=>"August",
+                "Sep"=>"September",
+                "Oct"=>"Oktober",
+                "Nov"=>"November",
+                "Dec"=>"Dezember");
+	
 	for($i=0;$i<5;$i++){
 		$d = $rdate->format('mY');
 		
@@ -135,7 +149,7 @@ if($todo == "all"){
 						$row["anz"]
 					];
 					$temp2 = [ 
-						$rdate->format('mY')
+						$monate[$rdate->format('M')] ." " . $rdate->format('Y')
 					];
 						array_push($labels, $temp2);
 						array_push($items, $temp1);
