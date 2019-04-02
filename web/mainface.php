@@ -334,6 +334,7 @@ function getDateMonthsBefore(date,nofMonths) {
     date.setMonth(thisMonth - nofMonths);
     if ((thisMonth - nofMonths < 0) && (date.getMonth() != (thisMonth + nofMonths))) {
         date.setDate(0);
+
     } else if ((thisMonth - nofMonths >= 0) && (date.getMonth() != thisMonth - nofMonths)) {
         date.setDate(0);
     }
@@ -345,6 +346,7 @@ function getDateMonthsAfter(date,nofMonths) {
     date.setMonth(thisMonth + nofMonths);
     if ((thisMonth + nofMonths > 11) && (date.getMonth() != (thisMonth - nofMonths))) {
         date.setDate(0);
+        alert("i am here: currentDate:" + date);
     } else if ((thisMonth + nofMonths <= 11) && (date.getMonth() != (thisMonth + nofMonths))) {
         date.setDate(0);
     }
