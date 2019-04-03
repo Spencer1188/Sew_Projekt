@@ -4,12 +4,12 @@ APP
 - Einkauf-Charts erstellen
 - Einkaufsliste erstellen
 - Falsch gescannte Artikeln ändern direkt nach dem scannen
+- Falsch gescannte Artikeln ändern
 
 Web
 
 - Monatsübersicht buggy - reparieren (Chart)
 - Einkäufe an gewissen Tagen ansehen
-- Falsch gescannte Artikeln ändern
 
 Allgemein
 
