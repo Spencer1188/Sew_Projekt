@@ -4,7 +4,7 @@
 	session_start();
 	$id = $_SESSION["id"];
 
-$sql = "SELECT* FROM list order by date desc";
+$sql = "SELECT* FROM list order by date ASC";
 $result = $conn->query($sql);
 
 
@@ -64,25 +64,54 @@ echo "
 						// output data of each row
 						while($row = $result->fetch_assoc()) {  ?>
 				<tr onClick="open_list(<?php echo $row["id"] ?>)">
-				  <th scope="row"><?php echo $row["name"] ?></th>
+				  <th scope="row" id="name<?php echo $row["id"] ?>"><?php echo $row["name"] ?></th>
 				  <td><?php echo $row["date"] ?></td>
-				  <td><?php echo $row["active"] ?></td>
+				  <td><?php if($row["active"] == 1){ ?>
+						<i class="fas fa-check-square" style="color: #689f38"></i>
+					<?php }else{ ?>
+					 	<i class="fas fa-window-close" style="color: #e64a19"></i>
+					 <?php } ?>
+				  </td>
 				  <td>
 					  <i class="fas fa-edit" onClick="edit(<?php echo $row["id"] ?>)"></i>
 					  <i class="fas fa-trash" onClick="delete(<?php echo $row["id"] ?>)"></i>
 				  </td>
 				</tr>
 			<?php
-					} } else {
-						echo "0 results";
-					} ?>
+					} 
+				  } else { ?>
+ 				<tr>
+				   <td colspan="4">
+					 	Keine Listen erstellt!
+					</td>
+				 </tr>
+					<?php } ?>
 				 <tr>
-				  <td colspan="4"></td>
+				   <td colspan="4">
+					 	 <i class="fas fa-plus-square" style="font-size: 20px"></i>
+					</td>
 				 </tr>
 			</tbody>
 		</table>
 		
 	</div>
-	
+	<?php include "listinfo_modal.php"; ?>
 </body>
+	<script src="asserts/js/my-main.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="asserts/js/bootstrap.js"></script>
+	<script>
+	
+	function edit(val){
+		$("#myModal").modal();
+		var title = $("#name"+val).text();
+		$("#title").val(title);
+		
+	}
+		
+	function safe_changes(){
+	}
+	
+	
+	</script>
 </html>

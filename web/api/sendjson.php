@@ -122,6 +122,20 @@ if($todo == "all"){
 		$items = array();
 		$arr = array();
 	
+	$monate = array(
+				"Jan"=>"Januar",
+                "Feb"=>"Februar",
+                "Mar"=>"März",
+                "Apr"=>"April",
+                "May"=>"Mai",
+                "Jun"=>"Juni",
+                "Jul"=>"Juli",
+                "Aug"=>"August",
+                "Sep"=>"September",
+                "Oct"=>"Oktober",
+                "Nov"=>"November",
+                "Dec"=>"Dezember");
+	
 	for($i=0;$i<5;$i++){
 		$d = $rdate->format('mY');
 		
@@ -135,7 +149,7 @@ if($todo == "all"){
 						$row["anz"]
 					];
 					$temp2 = [ 
-						$rdate->format('mY')
+						$monate[$rdate->format('M')] ." " . $rdate->format('Y')
 					];
 						array_push($labels, $temp2);
 						array_push($items, $temp1);
@@ -160,6 +174,40 @@ if($todo == "all"){
 		echo json_encode($arr);
 	
 	
+}else if($todo == "most"){
+		$id = $_GET["usrid"];
+		$labels = array();
+		$items = array();
+		$arr = array();
+	
+	$sql = "SELECT count(*) as anz,name FROM `items` where usr_id=$id GROUP BY token order by anz desc limit 3";
+	$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+			// output data of each row
+			while($row = $result->fetch_assoc()) {
+					$temp1 = [ 
+						$row["anz"]
+					];
+					$temp2 = [ 
+						$row["name"]
+					];
+						array_push($labels, $temp2);
+						array_push($items, $temp1);
+				}
+		} else {
+					$temp1 = [ 
+						0
+					];
+					$temp2 = [ 
+						""
+					];
+						array_push($labels, $temp2);
+						array_push($items, $temp1);
+		}
+		array_push($arr, $labels);
+		array_push($arr, $items);
+		echo json_encode($arr);
 }
 }else{
 	echo "Use Api";
