@@ -24,7 +24,7 @@
     </div>
 </nav>
 <div class="wrapper fadeInDown">
-		
+
   <div id="formContent">
     <!-- Tabs Titles -->
 
@@ -38,8 +38,8 @@
       <input type="email" id="email" class="fadeIn second" name="login" placeholder="Email">
       <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password">
 	  <button onClick="do_login()" type="submit">Login</button><br><br>
-	
-	  
+
+
 
 	<div class="alert alert-danger no-visible-error" role="alert" id="error-alert">
 		<p id="error"></p>
@@ -54,13 +54,13 @@
 
   </body>
 <script>
-	
-	
+
+
 	function do_login(){
-		
+
 		 var email=$("#email").val();
 		 var pass=$("#password").val();
-		
+
 		 if(email!="" && pass!="" )
 		 {
 			  $.ajax
@@ -76,20 +76,20 @@
 					 $("#error-alert").removeClass("no-visible-error");
 					 $("#error-alert").addClass("visible-error");
 					  $("#error").text("Email oder Passwort falsch!");
-					 
+
 				  }else{
 					 window.location.href = "mainface.php";
 				  }
-			  },			
+			  },
 			  error:function() {
 				  M.toast({html: 'Fehler beim Login'})
 			  }
 			  });
 		 }else {
 		  alert("Please Fill All The Details");
-		 } 
+		 }
 
 		}
-	
+
 	</script>
 </html>

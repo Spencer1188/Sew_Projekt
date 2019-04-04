@@ -1,5 +1,5 @@
 <!doctype html>
-<?php 
+<?php
 	session_start();
 	$id = $_SESSION["id"];
 
@@ -21,7 +21,7 @@ echo "
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="#">Logo</a>
-  
+
   <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item">
@@ -35,7 +35,7 @@ echo "
     </li>
   </ul>
 </nav>
-	
+
 	<div class="jumbotron">
   <h1 class="display-4">Ihre Übersicht</h1>
   <p class="lead">Alles was wichtig ist Zusammengefasst</p>
@@ -48,7 +48,7 @@ echo "
 				<canvas id="chart-day"></canvas>
 				<button onClick="last_day()" class="btn btn-outline-dark">
 					<i class="fas fa-arrow-left"></i>
-				</button>				
+				</button>
 				<button onClick="reset_day()" class="btn btn-outline-dark">
 					<i class="fas fa-undo"></i>
 				</button>
@@ -61,7 +61,7 @@ echo "
 				<canvas id="chart-items"></canvas>
 			</div>
 		</div>
-	</section><br><br><br>	
+	</section><br><br><br>
 	<section id="widget-chart-month" class="container">
 		<div class="row" >
 			<div class="col-lg-6 text-center">
@@ -107,42 +107,44 @@ echo "
 		var date = d.getFullYear() + "-" + month + "-" + day;
 		var datem = d.getFullYear() + "-" + month + "-" + day;
 		const aktdate = d.getFullYear() + "-" + month + "-" + day;
-	
+		const aktdatenf =  day + "" + month + "" + d.getFullYear();
+
 	//Set Charts
 	window.onload = function () {
-		DrawChartDays(usrid,0);	
+		DrawChartDays(usrid,0);
 		DrawChartMonth(usrid,0);
 		DrawChartMost(usrid);
+		getchartitems(aktdatenf);
 
     }
 
 	function last_day(){
 		DrawChartDays(usrid,1);
 	}
-		
+
 	function next_day(){
 		DrawChartDays(usrid,2);
 	}
-		
+
 	function last_month(){
 		DrawChartMonth(usrid,1);
 	}
-		
+
 	function next_month(){
 		DrawChartMonth(usrid,2);
 	}
-		
+
 	function reset_day(){
 		DrawChartDays(usrid,3);
 	}
-			
+
 	function reset_month(){
 		DrawChartMonth(usrid,3);
 	}
-			
-// Draw Chart for the 5 Days		
+
+// Draw Chart for the 5 Days
 	function DrawChartDays(usrid,val){
-	
+
 		if(val == 1){
 				d.setDate(d.getDate() - 1);
 				if((d.getMonth()+1) < 9){
@@ -157,7 +159,7 @@ echo "
 				}
 				date = d.getFullYear() + "-" + month + "-" + day;
 		}
-		
+
 		if(val == 2){
 				d.setDate(d.getDate() + 1);
 				if((d.getMonth()+1) < 9){
@@ -172,14 +174,14 @@ echo "
 				}
 				date = d.getFullYear() + "-" + month + "-" + day;
 		}
-		
+
 		if(val == 3){
 				date = aktdate;
 		}
 			if(val == 1 || val == 2 || val == 3){
 				chartday.reset();
 			}
-		
+
 		const url = "api/sendjson.php?op=daybyday&date="+date+"&usrid="+usrid;
 			$.ajax({
 				url: url,
@@ -236,13 +238,13 @@ echo "
 				error: function(thrownError){
 					alert("error");
 				}
-				
+
 			});
-		
+
 
 		  }
-				
-// Draws the Chart for the selected Point		
+
+// Draws the Chart for the selected Point
 	function getchartitems(date){
 			const url = "api/sendjson.php?op=itemsday&day="+date+"&usrid="+usrid;
 			$.ajax({
@@ -269,13 +271,13 @@ echo "
 				error: function(thrownError){
 					alert("error");
 				}
-				
+
 			});
-			
+
 		}
-		
+
 	function DrawChartMonth(usrid,val){
-	
+
 		if(val == 1){
 				m = new Date(getDateMonthsBefore(m,1));
 				if((m.getMonth()+1) < 9){
@@ -290,7 +292,7 @@ echo "
 				}
 				datem = m.getFullYear() + "-" + month + "-" + day;
 		}
-			
+
 		if(val == 2){
 				m = new Date(getDateMonthsAfter(m,1));
 				if((m.getMonth()+1) < 9){
@@ -305,16 +307,16 @@ echo "
 				}
 				datem = m.getFullYear() + "-" + month + "-" + day;
 		}
-		
+
 		if(val == 3){
 				datem = aktdate;
 		}
-		
+
 		if(val == 1 || val == 2 || val == 3){
 			chartmonth.reset();
 		}
-		
-		
+
+
 		const url = "api/sendjson.php?op=monthbymonth&date="+datem+"&usrid="+usrid;
 			$.ajax({
 				url: url,
@@ -326,7 +328,7 @@ echo "
 					chartmonth = new Chart(ctxday,{
 					// The type of chart we want to create
 					type: 'line',
-					
+
 					// The data for our dataset
 					data: {
 						labels: result[0].reverse(),
@@ -336,7 +338,7 @@ echo "
 							borderColor: '#42a5f5',
 							data: result[1].reverse()
 						}]
-					},				
+					},
 					options: {
 						scales: {
 							yAxes: [{
@@ -354,12 +356,12 @@ echo "
 				error: function(thrownError){
 					alert("error");
 				}
-				
+
 			});
-		
+
 
 		  }
-			
+
 		function DrawChartMost(usrid){
 			const url = "api/sendjson.php?op=most&usrid="+usrid;
 			$.ajax({
@@ -382,16 +384,16 @@ echo "
 						  ]
 						}
 					});
-					
+
 				},
 				error: function(thrownError){
 					alert("error");
 				}
-				
+
 			});
 		}
-		
-		
+
+
 function getDateMonthsBefore(date,nofMonths) {
     var thisMonth = date.getMonth();
     date.setMonth(thisMonth - nofMonths);
@@ -403,7 +405,7 @@ function getDateMonthsBefore(date,nofMonths) {
     }
     return date;
 }
-		
+
 function getDateMonthsAfter(date,nofMonths) {
     var thisMonth = date.getMonth();
     var thisYear = date.getFullYear();

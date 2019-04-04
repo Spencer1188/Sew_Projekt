@@ -1,5 +1,5 @@
 <!doctype html>
-<?php 
+<?php
 	include "api/dbconfig.php";
 	session_start();
 	$id = $_SESSION["id"];
@@ -22,7 +22,7 @@ echo "
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="mainface.php">Logo</a>
-  
+
   <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item">
@@ -36,18 +36,18 @@ echo "
     </li>
   </ul>
 </nav>
-	
+
 	<div class="jumbotron">
   <h1 class="display-4">Einkaufsliste</h1>
   <p class="lead">Alles was Sie benötigen</p>
   <hr class="my-4">
 </div>
-	
+
 	<div class="container" id="table-buylist">
 
-		
+
 	</div>
-	
+
 	<?php include "listinfo_modal.php"; ?>
 </body>
 	<script src="asserts/js/my-main.js"></script>
@@ -64,7 +64,7 @@ echo "
 		$("#update_in").val(title);
 		editid = val;
 	}
-	
+
 	function deletelist(val){
 		var url = "asserts/php/delete_buylist.php?val="+val;
 
@@ -76,7 +76,7 @@ echo "
 		  type: "GET"
 		});
 	}
-		
+
 	function safe_changes(){
 		var inp = $("#update_in").val();
 		var url = "asserts/php/update_buylist_title.php?val="+inp+"&id="+editid;
@@ -89,13 +89,13 @@ echo "
 		  type: "GET"
 		});
 	}
-		
+
 	function open_list(){
-			
+
 	}
-		
-	
-	
-	
+
+
+
+
 	</script>
 </html>
