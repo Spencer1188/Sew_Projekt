@@ -12,7 +12,7 @@
        	<div class="row justify-content-md-center">
 				<fieldset class="col col-lg-10">
 					<legend>Titel</legend>
-					<input id="title" type="text" class="form-control">
+					<input id="update_in" type="text" class="form-control">
 				</fieldset>
 		</div>
       </div>
