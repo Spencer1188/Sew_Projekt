@@ -2,7 +2,7 @@
 <?php
 	session_start();
 	$id = $_SESSION["id"];
-
+	echo $id;
 echo "
    <script type=\"text/javascript\"><!--
  	var usrid = \"".$id."\";

@@ -1,31 +1,35 @@
 <?php
 //Login
 require_once 'dbconfig.php';
-$token = 'maxserver';
 
-if( isset($_POST['token']) and $_POST['prefix']){
-//Retrieve the data.
-$prefix = $_POST['prefix'];
-$ean = $_POST['token'];
+if($_GET["func"] == "additem"){
+	$token = 'maxserver';
 
-//EAN Search
-$xml = file_get_contents("https://api.ean-search.org/api?" . "op=barcode-lookup&token=$token&ean=$ean");
-$response = new SimpleXMLElement($xml);
-$productName = $response->product->name;
-$date = date("dmY");
+	if( isset($_GET['eantoken']) and $_GET['prefix']){
+	//Retrieve the data.
+	$prefix = $_GET['prefix'];
+	$ean = $_GET['eantoken'];
+	$usrid = $_GET["usrid"];
 
-//Sql insert db
+	//EAN Search
+	$xml = file_get_contents("https://api.ean-search.org/api?" . "op=barcode-lookup&token=$token&ean=$ean");
+	$response = new SimpleXMLElement($xml);
+	$productName = $response->product->name;
+	$date = date("dmY");
 
-$sql = "INSERT INTO items (prefix,token,name,date) VALUES ('$prefix','$ean','$productName','$date')";
+	//Sql insert db
 
-if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+	$sql = "INSERT INTO items (usr_id,prefix,token,name,date) VALUES ('$usrid','$prefix','$ean','$productName','$date')";
+
+	if ($conn->query($sql) === TRUE) {
+		echo "New record created successfully";
+	} else {
+		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
+	}else{
+		echo "Use API!";
+	}
+	$conn->close();
 }
-}else{
-	echo "Use API!";
-}
-$conn->close();
 
 ?>
