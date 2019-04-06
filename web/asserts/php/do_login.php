@@ -28,9 +28,7 @@
 			echo "ok";
 					
 	}
-	else{ 
-		session_start();
-		$_SESSION['vali'] = 0;
+	else{
 		echo "error";
 	}
 
