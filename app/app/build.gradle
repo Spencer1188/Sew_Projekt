@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.barcodereader"
-        minSdkVersion 18
+        minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -36,8 +36,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.google.http-client:google-http-client-android:+'
-    implementation 'com.google.api-client:google-api-client-android:+'
-    implementation 'com.google.api-client:google-api-client-gson:+'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

@@ -19,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.252" />
+        app:layout_constraintVertical_bias="0.296" />
 
     <TextView
         android:id="@+id/scan_format"
@@ -40,7 +40,7 @@
         android:layout_below="@id/scan_format"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="84dp"
         android:textIsSelectable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -81,5 +81,15 @@
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/responsetxt"
+        android:layout_width="89dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="8dp"
+        android:text="r-txt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scan_content" />
 
 </android.support.constraint.ConstraintLayout>
