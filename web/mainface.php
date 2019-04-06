@@ -1,13 +1,24 @@
 <!doctype html>
 <?php
-	session_start();
-	$id = $_SESSION["id"];
-	echo $id;
-echo "
-   <script type=\"text/javascript\"><!--
- 	var usrid = \"".$id."\";
-   </script>
- ";
+
+session_start();
+
+	if(isset($_GET["sessionid"])){
+		$id = $_GET["sessionid"];
+		echo "
+	   <script type=\"text/javascript\"><!--
+		var usrid = \"".$id."\";
+	   </script>
+	 ";
+	}else{
+		if($_SESSION["vali"] == 1){
+		$id = $_SESSION["id"];
+	echo "
+	   <script type=\"text/javascript\"><!--
+		var usrid = \"".$id."\";
+	   </script>
+	 ";
+	
 ?>
 <html>
 <head>
@@ -424,3 +435,5 @@ function getDateMonthsAfter(date,nofMonths) {
 
 </script>
 </html>
+<?php 
+	}else{ header("LOCATION: index.php"); } } ?>
