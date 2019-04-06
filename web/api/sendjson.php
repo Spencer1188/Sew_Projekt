@@ -139,7 +139,7 @@ if($todo == "all"){
 	for($i=0;$i<5;$i++){
 		$d = $rdate->format('mY');
 
-		$sql = "SELECT count(*) as anz FROM `items` where id='$id' and date like '%$d'";
+		$sql = "SELECT count(*) as anz FROM `items` where usr_id='$id' and date like '%$d'";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
