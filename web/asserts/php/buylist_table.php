@@ -45,7 +45,7 @@
 					<?php } ?>
 				 <tr>
 				   <td colspan="4">
-					 	 <i class="fas fa-plus-square" style="font-size: 20px"></i>
+					 	 <i class="fas fa-plus-square" style="font-size: 20px" onClick="newList()"></i>
 					</td>
 				 </tr>
 			</tbody>

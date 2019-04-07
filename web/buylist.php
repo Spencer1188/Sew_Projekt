@@ -93,6 +93,19 @@ echo "
 	function open_list(){
 
 	}
+		
+	function newList(){
+		
+		$.ajax({
+		  url: "asserts/php/create_new_list.php?usrid="+usrid,
+		  success: function(data){  
+			  alert(data);
+			window.location.href = "newlist.php";
+		  },
+		  type: "GET"
+		});
+		
+	}
 
 
 

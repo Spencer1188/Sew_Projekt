@@ -2,6 +2,8 @@
 //Login
 require_once 'dbconfig.php';
 
+if(isset($_GET["func"])){
+
 if($_GET["func"] == "additem"){
 	$token = 'maxserver';
 
@@ -30,6 +32,25 @@ if($_GET["func"] == "additem"){
 		echo "Use API!";
 	}
 	$conn->close();
+}else if($_GET["func"] == "login"){
+	
+	$mail = $_GET["mail"];
+	$password = $_GET["password"];
+	$password_hash = hash('sha256', $password);
+	$regusr = mysqli_query($conn,"SELECT * FROM `user` WHERE mail = '$mail'");
+	$dbusr = mysqli_fetch_array($regusr);
+
+	if($dbusr["password"] == $password_hash){
+			
+		echo json_encode($dbusr["usr_id"]);
+	}
+	else{
+		echo json_encode("error");
+	}
+}
+	
+}else{
+	echo "Use APi";
 }
 
 ?>
