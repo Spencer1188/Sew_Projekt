@@ -2,7 +2,7 @@
 	include "../../api/dbconfig.php";
 	session_start();
 	$id = $_SESSION["id"];
-	$sql = "SELECT DISTINCT token,name,id FROM `items`";
+	$sql = "SELECT token,name,id FROM `items` group by token";
 	$result = $conn->query($sql);
 ?>
 		<table class="table table-striped">
@@ -21,7 +21,7 @@
 							<tr>
 							  <th scope="row" id="name<?php echo $row["name"] ?>"><?php echo $row["name"] ?></th>
 							  <td class="text-center">
-								  <i class="fas fa-plus" onClick="add(<?php echo $row["id"] ?>)"></i>
+								  <i class="fas fa-plus" onClick="additem(<?php echo $row["id"] ?>)"></i>
 							  </td>
 							</tr>
 				<?php

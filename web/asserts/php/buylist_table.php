@@ -20,7 +20,7 @@
 				  if ($result->num_rows > 0) {
 						// output data of each row
 						while($row = $result->fetch_assoc()) {  ?>
-				<tr onClick="open_list(<?php echo $row["id"] ?>)">
+				<tr>
 				  <th scope="row" id="name<?php echo $row["id"] ?>"><?php echo $row["name"] ?></th>
 				  <td><?php echo $row["date"] ?></td>
 				  <td><?php if($row["active"] == 1){ ?>
@@ -30,7 +30,7 @@
 					 <?php } ?>
 				  </td>
 				  <td class="text-center">
-					  <i class="fas fa-edit" onClick="edit(<?php echo $row["id"] ?>)"></i>
+					  <i class="fas fa-edit" onClick="open_list(<?php echo $row["id"] ?>)"></i>
 					  <i class="fas fa-trash" onClick="deletelist(<?php echo $row["id"] ?>)"></i>
 				  </td>
 				</tr>

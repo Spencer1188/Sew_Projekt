@@ -90,8 +90,8 @@ echo "
 		});
 	}
 
-	function open_list(){
-
+	function open_list(id){
+		window.location.href = "newlist.php?type=edit&id="+id;
 	}
 		
 	function newList(){
@@ -99,8 +99,7 @@ echo "
 		$.ajax({
 		  url: "asserts/php/create_new_list.php?usrid="+usrid,
 		  success: function(data){  
-			  alert(data);
-			window.location.href = "newlist.php";
+			window.location.href = "newlist.php?type=new";
 		  },
 		  type: "GET"
 		});
