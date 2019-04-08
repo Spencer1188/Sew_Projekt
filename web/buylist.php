@@ -17,6 +17,7 @@ echo "
 	<link type="text/css" rel="stylesheet" href="asserts/css/bootstrap.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php include("favicon.php"); ?>
 </head>
 <body>
 	<?php include "nav.php"; ?>

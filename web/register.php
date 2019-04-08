@@ -6,6 +6,7 @@
     <title>Registrieren-EinkaufManager</title>
 	  	<link type="text/css" rel="stylesheet" href="asserts/css/bootstrap.css">
 	  	<link type="text/css" rel="stylesheet" href="asserts/css/my.css">
+	<?php include("favicon.php"); ?>
 </head>
 <body class="register" id="regform">
 

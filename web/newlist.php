@@ -34,6 +34,7 @@ echo "
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php include("favicon.php"); ?>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
