@@ -296,7 +296,7 @@ input[type=password]:placeholder,input[type=email]:placeholder {
 /* Register */
 
 .register{
-    background-image: url("../../images/bg/main.png");
+    background-image: url("../../images/bg/main.jpg");
     padding: 3%;
 	margin: 0px;
 	width: 100%;
