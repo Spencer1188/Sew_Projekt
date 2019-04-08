@@ -18,7 +18,6 @@ echo "
 	$id = $_SESSION["id"];
 	$listid = $_GET["id"];
 	$_SESSION["last_list_id"] = $listid;
-	echo $listid;
 echo "
    <script type=\"text/javascript\"><!--
  	var usrid = \"".$id."\";

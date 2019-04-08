@@ -2,6 +2,10 @@
 /* BASIC */
 @import url('https://fonts.googleapis.com/css?family=Teko');
 
+#hover-out :hover{
+	color: black;
+}
+
 html {
   background-color: #56baed;
 }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register-EinkaufManager</title>
+    <title>Registrieren-EinkaufManager</title>
 	  	<link type="text/css" rel="stylesheet" href="asserts/css/bootstrap.css">
 	  	<link type="text/css" rel="stylesheet" href="asserts/css/my.css">
 </head>

@@ -29,23 +29,7 @@ session_start();
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <!-- Brand/logo -->
-  <a class="navbar-brand" href="#">Logo</a>
-
-  <!-- Links -->
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="asserts/php/logout.php">Logout</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="mainface.php">Übersicht</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="buylist.php">Einkaufsliste</a>
-    </li>
-  </ul>
-</nav>
+<?php include "nav.php"; ?>
 
 	<div class="jumbotron">
   <h1 class="display-4">Ihre Übersicht</h1>
@@ -67,7 +51,7 @@ session_start();
 					<i class="fas fa-arrow-right"></i>
 				</button>
 			</div>
-			<div class="col-lg-6 col-sm-12">
+			<div class="col-lg-6 col-sm-12 abs-oben">
 				<h1 style="color: white"></h1>
 				<canvas id="chart-items"></canvas>
 			</div>
@@ -87,8 +71,8 @@ session_start();
 				<button onClick="next_month()" class="btn btn-outline-dark">
 					<i class="fas fa-arrow-right"></i>
 				</button>
-			</div>
-			<div class="col-lg-6 text-center">
+			</div><br><br>
+			<div class="col-lg-6 text-center abs-oben">
 				<h1>Meist gekaufte Artikel</h1>
 				<canvas id="chart-most"></canvas>
 			</div>
