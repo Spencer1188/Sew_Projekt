@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             formatTxt.setText("FORMAT: " + scanFormat);
             contentTxt.setText("CONTENT: " + scanContent);
             try {
-                sendData(scanFormat,scanContent);
+                sendScanData(scanFormat,scanContent);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
     }
 
-    void sendData(String id, String name) throws IOException {
+    void sendScanData(String id, String name) throws IOException {
 
         OkHttpClient client = new OkHttpClient();
 
