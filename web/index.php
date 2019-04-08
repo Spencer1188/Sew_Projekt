@@ -11,7 +11,7 @@
 
   <body class="abstract-bg">
 <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
-    <a href="/" class="navbar-brand d-flex w-50 mr-auto">LOGO</a>
+  
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,8 +29,12 @@
     <!-- Tabs Titles -->
 
     <!-- Icon -->
-    <div class="fadeIn first" style="padding: 20px">
-		<h1 class="headermain">Ihr Einkaufsmanager</h1>
+    <div class="fadeIn first row" style="padding: 20px; text-align: center">
+		<h1 class="headermain col-sm-12 col-lg-9 align-content-center">Ihr Einkaufsmanager</h1>
+		<div class="col-sm-12 col-lg-3">
+			<img class="navbar-brand w-50 d-flex mr-auto" 		src="images/logo/logo_barcodescanner.png" width="100%" 
+				 style="display: block; margin-left: auto; margin-right: auto;">
+		</div>
       <!--<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
     </div>
 
