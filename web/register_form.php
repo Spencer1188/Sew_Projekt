@@ -1,6 +1,6 @@
                 <div class="row">
                     <div class="col-md-3 register-left">
-                        <img src="" alt="Logo"/>
+                        <img src="images/logo/logo_barcodescanner.png" alt="Logo"/>
                         <h3>Willkommen</h3>
                         <p>Sie sind nur 30 Sekunden von ihrem Einkaufsmanager entfernt!</p><br>
 						<a href="index.php" id="hover-out" class="btn-outline-light btn">Einloggen</a>
