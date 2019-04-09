@@ -24,43 +24,51 @@ session_start();
 <head>
 <meta charset="utf-8">
 <title>Einkaufsliste</title>
-	<link type="text/css" rel="stylesheet" href="asserts/css/bootstrap.css">
+	<link rel="stylesheet" href="asserts/css/bootstrap.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+	<link rel="stylesheet" href="asserts/css/animate.css">
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php include("favicon.php"); ?>
 </head>
 <body>
-<?php include "nav.php"; ?>
 
+<header>
+	<?php include "nav.php"; ?>
 	<div class="jumbotron">
-  <h1 class="display-4">Ihre Übersicht</h1>
-  <p class="lead">Alles was wichtig ist Zusammengefasst</p>
-  <hr class="my-4">
-</div>
+	  <h1 class="display-4">Ihre Übersicht</h1>
+	  <p class="lead">Alles was wichtig ist Zusammengefasst</p>
+	  <hr class="my-4">
+	</div>
+</header>
+<main style="margin-bottom: 40px;">
 	<section id="widget-chart-day" class="container">
-		<div class="row" >
-			<div class="col-lg-6 col-sm-12 text-center">
-				<h1>Tagesansicht</h1>
-				<canvas id="chart-day"></canvas>
-				<button onClick="last_day()" class="btn btn-outline-dark">
-					<i class="fas fa-arrow-left"></i>
-				</button>
-				<button onClick="reset_day()" class="btn btn-outline-dark">
-					<i class="fas fa-undo"></i>
-				</button>
-				<button onClick="next_day()" class="btn btn-outline-dark">
-					<i class="fas fa-arrow-right"></i>
-				</button>
+		<div class="row row justify-content-center" >
+			<div class="col-lg-12 col-sm-12 text-center shadow-lg animated fadeInRight">
+			<div class="row">
+				<div class="col-lg-6 col-sm-12" style="padding-bottom: 20px;" id="chart-day-fade-in">
+					<h1>Tagesansicht</h1>
+					<canvas id="chart-day"></canvas>
+					<button onClick="last_day()" class="btn btn-outline-dark">
+						<i class="fas fa-arrow-left"></i>
+					</button>
+					<button onClick="reset_day()" class="btn btn-outline-dark">
+						<i class="fas fa-undo"></i>
+					</button>
+					<button onClick="next_day()" class="btn btn-outline-dark">
+						<i class="fas fa-arrow-right"></i>
+					</button>
+				</div>
+				<div class="col-lg-6 col-sm-12">
+					<h1 style="color: white"></h1>
+					<canvas id="chart-items"></canvas>
+				</div>
 			</div>
-			<div class="col-lg-6 col-sm-12 abs-oben">
-				<h1 style="color: white"></h1>
-				<canvas id="chart-items"></canvas>
 			</div>
 		</div>
 	</section><br><br><br>
 	<section id="widget-chart-month" class="container">
-		<div class="row" >
-			<div class="col-lg-6 text-center">
+		<div class="row justify-content-between" >
+			<div class="col-lg-5 text-center shadow-lg animated fadeInRight" style="padding-bottom: 20px;">
 				<h1>Monatsansicht</h1>
 				<canvas id="chart-month"></canvas>
 				<button onClick="last_month()" class="btn btn-outline-dark">
@@ -73,13 +81,14 @@ session_start();
 					<i class="fas fa-arrow-right"></i>
 				</button>
 			</div><br><br>
-			<div class="col-lg-6 text-center abs-oben">
+			<div class="col-lg-5 text-center abs-oben shadow-lg animated fadeInRight">
 				<h1>Meist gekaufte Artikel</h1>
 				<canvas id="chart-most"></canvas>
 			</div>
 		</div>
 	</section>
-	<br><br><br>
+	</main>
+	<?php include "footer.php"; ?>
 	<script src="asserts/js/jquery.js"></script>
 	<script src="asserts/js/chart.js"></script>
 	<script src="asserts/js/my-main.js"></script>

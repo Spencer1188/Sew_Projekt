@@ -16,23 +16,28 @@ echo "
 <title>Einkaufsliste</title>
 	<link type="text/css" rel="stylesheet" href="asserts/css/bootstrap.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+	<link rel="stylesheet" href="asserts/css/animate.css">
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php include("favicon.php"); ?>
+
 </head>
 <body>
+	
+
+<header>
 	<?php include "nav.php"; ?>
-
 	<div class="jumbotron">
-  <h1 class="display-4">Einkaufsliste</h1>
-  <p class="lead">Alles was Sie benötigen</p>
-  <hr class="my-4">
-</div>
-
-	<div class="container" id="table-buylist">
-
+	  <h1 class="display-4">Einkaufsliste</h1>
+	  <p class="lead">Alles was Sie benötigen</p>
+	  <hr class="my-4">
+	</div>
+</header>
+<main>
+	<div class="container shadow-sm animated fadeInRight" id="table-buylist" style="padding: 40px;">
+</main>
 
 	</div>
-
+	<?php include "footer.php"; ?>
 	<?php include "listinfo_modal.php"; ?>
 </body>
 	<script src="asserts/js/my-main.js"></script>

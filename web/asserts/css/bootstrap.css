@@ -61,7 +61,15 @@ body {
   color: #212529;
   text-align: left;
   background-color: #fff;
+	 display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
+
+
+  main {
+    flex: 1 0 auto;
+  }
 
 [tabindex="-1"]:focus {
   outline: 0 !important;
@@ -1216,9 +1224,9 @@ pre code {
     max-width: 33.333333%;
   }
   .col-lg-5 {
-    -ms-flex: 0 0 41.666667%;
-    flex: 0 0 41.666667%;
-    max-width: 41.666667%;
+    -ms-flex: 0 0 48.666667%;
+    flex: 0 0 48.666667%;
+    max-width: 48.666667%;
   }
   .col-lg-6 {
     -ms-flex: 0 0 50%;

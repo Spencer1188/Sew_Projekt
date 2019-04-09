@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+<nav class="navbar navbar-expand-lg navbar-light static-top shadow-sm" style="background-color: #b3e5fc;">
   <div class="container">
     <a class="navbar-brand" href="#">
            <img src="images/logo/logo_barcodescanner.png" width="20%" >
