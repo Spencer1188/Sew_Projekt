@@ -52,10 +52,10 @@
 
   </div>
 </div>
-	<script src="asserts/js/bootstrap.bundle.js"></script>
 	<script src="asserts/js/jquery.js"></script>
 	<script src="asserts/js/chart.js"></script>
 	<script src="asserts/js/my-main.js"></script>
+	<script src="asserts/js/bootstrap.bundle.js"></script>
 
   </body>
 <script>
