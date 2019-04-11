@@ -11,13 +11,18 @@ session_start();
 	   </script>
 	 ";
 	}else{
-		if($_SESSION["vali"] == 1){
+		if($_SESSION["vali"] != 1){
+			die("Error");
+		}
 		$id = $_SESSION["id"];
 	echo "
 	   <script type=\"text/javascript\"><!--
 		var usrid = \"".$id."\";
 	   </script>
 	 ";
+	}
+			
+	
 	
 ?>
 <html>
@@ -429,5 +434,3 @@ function getDateMonthsAfter(date,nofMonths) {
 
 </script>
 </html>
-<?php 
-	}else{ header("LOCATION: index.php"); } } ?>
