@@ -31,11 +31,14 @@
             <h5 class="text-uppercase">Links</h5>
 
             <ul class="list-unstyled">
-              <li>
-                <a href="impressum.php">Impressum</a>
+              <li style="padding: 5px;">
+				 <button type="button" class="btn btn-outline-danger btn-sm" onClick="footerlinks(0)">Impressum</button>
               </li>
-              <li>
-                <a href="contact.php">Kontakt</a>
+              <li style="padding: 5px;">
+                <button type="button" class="btn btn-outline-danger btn-sm" onClick="footerlinks(1)">Kontakt</button>
+              </li>
+              <li style="padding: 5px;">
+                <button type="button" class="btn btn-outline-danger btn-sm" onClick="footerlinks(2)">Team</button>
               </li>
             </ul>
 
@@ -55,3 +58,15 @@
 
   </footer>
   <!-- Footer -->
+<script>
+	function footerlinks(direction){
+		if(direction == 0){
+			window.location.href = "Impressum.php";
+		}else if(direction == 1){
+			window.location.href = "contact.php";
+		}else if(direction == 2){
+			window.location.href = "Team.php";
+		}
+	}
+
+</script>
