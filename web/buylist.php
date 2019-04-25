@@ -26,12 +26,7 @@ echo "
 
 <header>
 	<?php include "nav.php"; ?>
-	<div class="jumbotron">
-	  <h1 class="display-4">Einkaufsliste</h1>
-	  <p class="lead">Alles was Sie benötigen</p>
-	  <hr class="my-4">
-	</div>
-</header>
+</header><br><br>
 <main>
 	<div class="container shadow-sm animated fadeInRight" id="table-buylist" style="padding: 40px;">
 </main>

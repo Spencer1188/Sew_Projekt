@@ -38,13 +38,12 @@ session_start();
 <body>
 
 <header>
-	<?php include "nav.php"; ?>
-	<div class="jumbotron">
-	  <h1 class="display-4">Ihre Übersicht</h1>
-	  <p class="lead">Alles was wichtig ist Zusammengefasst</p>
-	  <hr class="my-4">
-	</div>
-</header>
+	<?php if(isset($_GET["nav"])){
+		include "navlogo.php";
+	}else{
+		include "nav.php";	
+	}  ?>
+</header><br>
 <main style="margin-bottom: 40px;">
 	<section id="widget-chart-day" class="container">
 		<div class="row row justify-content-center" >
@@ -208,8 +207,8 @@ session_start();
 						labels: result[0].reverse(),
 						datasets: [{
 							label: 'Einkäufe',
-							backgroundColor: '#42a5f5',
-							borderColor: '#42a5f5',
+							backgroundColor: '#e53935',
+							borderColor: '#ef5350',
 							data: result[1].reverse()
 						}]
 					},
@@ -344,8 +343,8 @@ session_start();
 						labels: result[0].reverse(),
 						datasets: [{
 							label: 'Einkäufe',
-							backgroundColor: '#42a5f5',
-							borderColor: '#42a5f5',
+							backgroundColor: '#e53935',
+							borderColor: '#ef5350',
 							data: result[1].reverse()
 						}]
 					},
@@ -388,7 +387,7 @@ session_start();
 						  datasets: [
 							{
 							  label: "Artikelmenge",
-							  backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+							  backgroundColor: ["#e53935", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
 							  data: result[1]
 							}
 						  ]
