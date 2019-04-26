@@ -58,11 +58,9 @@
 <script>
 	function footerlinks(direction){
 		if(direction == 0){
-			window.location.href = "Impressum.php";
+			window.location.href = "impressum.php";
 		}else if(direction == 1){
 			window.location.href = "contact.php";
-		}else if(direction == 2){
-			window.location.href = "Team.php";
 		}
 	}
 
