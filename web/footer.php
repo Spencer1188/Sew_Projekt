@@ -37,9 +37,6 @@
               <li style="padding: 5px;">
                 <button type="button" class="btn btn-outline-danger btn-sm" onClick="footerlinks(1)">Kontakt</button>
               </li>
-              <li style="padding: 5px;">
-                <button type="button" class="btn btn-outline-danger btn-sm" onClick="footerlinks(2)">Team</button>
-              </li>
             </ul>
 
           </div>
