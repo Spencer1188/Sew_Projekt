@@ -20,7 +20,7 @@
 
 $select = mysqli_query($conn, "SELECT `mail` FROM `user` WHERE `mail` = '".$_POST['mail']."'") or exit(mysqli_error($conn));
 if(mysqli_num_rows($select)) {
-    die('This email is already being used');
+    die('Diese Email wird bereits verwendet');
 }
 
 

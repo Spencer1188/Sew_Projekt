@@ -14,7 +14,8 @@ echo "
 <head>
 <meta charset="utf-8">
 <title>Einkaufsliste</title>
-	<link type="text/css" rel="stylesheet" href="asserts/css/bootstrap.css">
+	<link rel="stylesheet" href="asserts/css/bootstrap.css">
+	<link rel="stylesheet" href="asserts/css/mdb.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 	<link rel="stylesheet" href="asserts/css/animate.css">
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,9 +36,11 @@ echo "
 	<?php include "footer.php"; ?>
 	<?php include "listinfo_modal.php"; ?>
 </body>
+	<script src="asserts/js/jquery.js"></script>
+	<script type="text/javascript" src="js/popper.min.js"></script>
+	<script src="asserts/js/bootstrap.bundle.js"></script>
+  	<script type="text/javascript" src="js/mdb.min.js"></script>
 	<script src="asserts/js/my-main.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="asserts/js/bootstrap.js"></script>
 	<script>
 		var editid;
 	window.onload = function () {

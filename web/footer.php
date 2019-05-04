@@ -49,7 +49,7 @@
     <!-- Footer Links -->
 
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3 bg-dark">© <?php echo date("Y"); ?> Copyright: Maximilian Göckler & Mathias Fallmann
+    <div class="footer-copyright text-center py-3 bg-dark" style="color: white">© <?php echo date("Y"); ?> Copyright: Maximilian Göckler & Mathias Fallmann
     </div>
     <!-- Copyright -->
 

@@ -24,8 +24,9 @@ session_start();
 ?>
 <html><head>
 <meta charset="utf-8">
-<title>Einkaufsliste</title>
+<title>Einkaufsübersicht</title>
 	<link rel="stylesheet" href="asserts/css/bootstrap.css">
+	<link rel="stylesheet" href="asserts/css/mdb.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 	<link rel="stylesheet" href="asserts/css/animate.css">
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -91,8 +92,10 @@ session_start();
 	<?php include "footer.php"; ?>
 	<script src="asserts/js/jquery.js"></script>
 	<script src="asserts/js/chart.js"></script>
-	<script src="asserts/js/my-main.js"></script>
+	<script type="text/javascript" src="js/popper.min.js"></script>
 	<script src="asserts/js/bootstrap.bundle.js"></script>
+  	<script type="text/javascript" src="js/mdb.min.js"></script>
+	<script src="asserts/js/my-main.js"></script>
 </body>
 	<script>
 		var chartday;

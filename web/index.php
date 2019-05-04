@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V18</title>
+	<title>Anmelden</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php include "favicon.php"; ?>
@@ -33,7 +33,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" style="padding-top: 50px;">
+				<div class="login100-form validate-form" style="padding-top: 200px;" method="post">
 		
 					<img class="login100-form-title p-b-43 small center" src="images/logo/logo_barcodescanner.png" width="20%">
 					</img>
@@ -51,7 +51,7 @@
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" type="password" name="pass" id="password">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
+						<span class="label-input100">Passwort</span>
 					</div>
 			
 
@@ -64,7 +64,7 @@
 					<div class="text-center p-t-46 p-b-20">
 							<a href="register.php">Oder Regestrieren Sie sich</a>
 					</div>
-				</form>
+				</div>
 
 				<div class="login100-more" style="background-image: url('images/bg/wallhaven-61437.jpg');">
 				</div>
