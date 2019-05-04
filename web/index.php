@@ -66,7 +66,7 @@
 					</div>
 				</div>
 
-				<div class="login100-more" style="background-image: url('images/bg/abstract-expressionism-abstract-painting-acrylic-1919287-min.jpg');">
+				<div class="login100-more" style="background-image: url('images/bg/abstract-bg-min .jpg');">
 				</div>
 			</div>
 		</div>
