@@ -1,66 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <?php include("favicon.php"); ?>
-    <title>Login-EinkaufManager</title>
-	  	<link type="text/css" rel="stylesheet" href="asserts/css/bootstrap.css">
-	  	<link type="text/css" rel="stylesheet" href="asserts/css/my.css">
-  </head>
+<head>
+	<title>Login V18</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php include "favicon.php"; ?>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<style>
+		.small{
+			width: 20% !important;
+		}
+		
+		.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+	</style>
+</head>
+<body style="background-color: #666666;">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" style="padding-top: 50px;">
+		
+					<img class="login100-form-title p-b-43 small center" src="images/logo/logo_barcodescanner.png" width="20%">
+					</img>
+					<div class="text-center p-t-46 p-b-20">
+							
+					</div>
+					
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="email" name="email" id="email">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Email</span>
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="pass" id="password">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Password</span>
+					</div>
+			
 
-  <body class="abstract-bg">
-<nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
-  
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
-        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-            <li class="nav-item">
-                <a class="nav-link" href="register.php">Registrieren</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<div class="wrapper fadeInDown">
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" onClick="do_login()">
+							Einloggen
+						</button>
+					</div>
+					
+					<div class="text-center p-t-46 p-b-20">
+							<a href="register.php">Oder Regestrieren Sie sich</a>
+					</div>
+				</form>
 
-  <div id="formContent">
-    <!-- Tabs Titles -->
-
-    <!-- Icon -->
-    <div class="fadeIn first row" style="padding: 20px; text-align: center">
-		<h1 class="headermain col-sm-12 col-lg-9 align-content-center">Ihr Einkaufsmanager</h1>
-		<div class="col-sm-12 col-lg-3">
-			<img class="navbar-brand w-50 d-flex mr-auto" 		src="images/logo/logo_barcodescanner.png" width="100%" 
-				 style="display: block; margin-left: auto; margin-right: auto;">
+				<div class="login100-more" style="background-image: url('images/bg/wallhaven-61437.jpg');">
+				</div>
+			</div>
 		</div>
-      <!--<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
-    </div>
-
-
-      <input type="email" id="email" class="fadeIn second" name="login" placeholder="Email">
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password">
-	  <button onClick="do_login()" type="submit">Login</button><br><br>
-
-
-
-	<div class="alert alert-danger no-visible-error" role="alert" id="error-alert">
-		<p id="error"></p>
 	</div>
-
-  </div>
-</div>
-	<script src="asserts/js/jquery.js"></script>
-	<script src="asserts/js/chart.js"></script>
-	<script src="asserts/js/my-main.js"></script>
-	<script src="asserts/js/bootstrap.bundle.js"></script>
-
-  </body>
-<script>
-
-
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<script src="js/main.js"></script>
+	<script>
+		
 	function do_login(){
 
 		 var email=$("#email").val();
@@ -77,10 +99,12 @@
 			   pw:pass
 			  },
 			  success:function(data) {
-				  if(data == "error"){
-					 $("#error-alert").removeClass("no-visible-error");
-					 $("#error-alert").addClass("visible-error");
-					  $("#error").text("Email oder Passwort falsch!");
+				if(data == "error"){
+						Swal.fire({
+						  type: 'error',
+						  title: 'Oops...',
+						  text: 'Email oder Passwort falsch!'
+						})
 
 				  }else{
 					 window.location.href = "mainface.php";
@@ -95,6 +119,9 @@
 		 }
 
 		}
-
+	
+	
 	</script>
+
+</body>
 </html>

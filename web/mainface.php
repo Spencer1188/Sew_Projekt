@@ -21,12 +21,8 @@ session_start();
 	   </script>
 	 ";
 	}
-			
-	
-	
 ?>
-<html>
-<head>
+<html><head>
 <meta charset="utf-8">
 <title>Einkaufsliste</title>
 	<link rel="stylesheet" href="asserts/css/bootstrap.css">
@@ -207,8 +203,8 @@ session_start();
 						labels: result[0].reverse(),
 						datasets: [{
 							label: 'Einkäufe',
-							backgroundColor: '#e53935',
-							borderColor: '#ef5350',
+							backgroundColor: '#05386B',
+							borderColor: '#05386B',
 							data: result[1].reverse()
 						}]
 					},
@@ -343,8 +339,8 @@ session_start();
 						labels: result[0].reverse(),
 						datasets: [{
 							label: 'Einkäufe',
-							backgroundColor: '#e53935',
-							borderColor: '#ef5350',
+							backgroundColor: '#05386B',
+							borderColor: '#05386B',
 							data: result[1].reverse()
 						}]
 					},
@@ -387,7 +383,7 @@ session_start();
 						  datasets: [
 							{
 							  label: "Artikelmenge",
-							  backgroundColor: ["#e53935", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+							  backgroundColor: ["#05386B", "#379683","#3cba9f","#5cdb95","#c45850"],
 							  data: result[1]
 							}
 						  ]

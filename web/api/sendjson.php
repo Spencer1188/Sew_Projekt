@@ -80,7 +80,7 @@ if($todo == "all"){
 }else if($todo== "itemsday"){
 		$date = $_GET["day"];
 		$id = $_GET["usrid"];
-		$background_colors = array('#e53935', '#90caf9', '#a5d6a7', '##cddc39', '#ff9800');
+		$background_colors = array('#3cba9f', '#5cdb95', '#a5d6a7', '#05386B', '#c45850');
 
 		$items = array();
 		$labels = array();

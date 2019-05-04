@@ -2,7 +2,7 @@
 
 
 <!-- Footer -->
-<footer class="page-footer font-small pt-4" style="background-color: #212121; color: white;">
+<footer class="page-footer font-small pt-4" style="background-color: #379683; color: white;">
 
     <!-- Footer Links -->
     <div class="container-fluid text-center text-md-left">
@@ -32,10 +32,10 @@
 
             <ul class="list-unstyled">
               <li style="padding: 5px;">
-				 <button type="button" class="btn btn-outline-danger btn-sm" onClick="footerlinks(0)">Impressum</button>
+				 <button type="button" class="btn btn-outline-light btn-sm" onClick="footerlinks(0)">Impressum</button>
               </li>
               <li style="padding: 5px;">
-                <button type="button" class="btn btn-outline-danger btn-sm" onClick="footerlinks(1)">Kontakt</button>
+                <button type="button" class="btn btn-outline-light btn-sm" onClick="footerlinks(1)">Kontakt</button>
               </li>
             </ul>
 
