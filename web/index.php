@@ -33,7 +33,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<div class="login100-form validate-form" style="padding-top: 200px;" method="post">
+				<div class="login100-form validate-form" style="padding-top: 30px;" method="post">
 		
 					<img class="login100-form-title p-b-43 small center" src="images/logo/logo_barcodescanner.png" width="20%">
 					</img>
@@ -66,7 +66,7 @@
 					</div>
 				</div>
 
-				<div class="login100-more" style="background-image: url('images/bg/abstract-bg-min .jpg');">
+				<div class="login100-more" style="background-image: url('images/bg/Login_Background.jpg');">
 				</div>
 			</div>
 		</div>

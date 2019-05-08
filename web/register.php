@@ -33,13 +33,10 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<div class="login100-form validate-form" style="padding-top: 200px;">
+				<div class="login100-form validate-form" style="padding-top: 20px;">
 		
 					<img class="login100-form-title p-b-43 small center" src="images/logo/logo_barcodescanner.png" width="20%">
 					</img>
-					<div class="text-center p-t-46 p-b-20">
-							
-					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="email" name="email" id="email">
@@ -69,7 +66,7 @@
 					</div>
 				</div>
 
-				<div class="login100-more" style="background-image: url('images/bg/wallhaven-61437.jpg');">
+				<div class="login100-more" style="background-image: url('images/bg/Register_Background.jpg');">
 				</div>
 			</div>
 		</div>

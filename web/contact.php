@@ -22,7 +22,8 @@
 				</div>
 				<div class="col-lg-4" style="padding: 10px; color: black">
 					<h5>Adresse</h5><hr style="background: white; margin: -4px;">
-					<p>Schulring 1</p>
+					<p>Schulring 1<br>
+					3370 Ybbs an der Donau</p>
 					<br>
 					<h5>Email</h5><hr style="background: white; margin: -4px;">
 					<p>Andreas.Brachinger@sz-ybbs.ac.at
