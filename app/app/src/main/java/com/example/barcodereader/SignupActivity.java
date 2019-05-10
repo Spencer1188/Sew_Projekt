@@ -10,6 +10,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
@@ -61,19 +70,62 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
-        String name = _nameText.getText().toString();
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
+
 
         // TODO: Implement your own signup logic here.
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onSignupSuccess or onSignupFailed
-                        // depending on success
-                        onSignupSuccess();
-                        // onSignupFailed();
+                        String username = _nameText.getText().toString();
+                        String email = _emailText.getText().toString();
+                        String password = _passwordText.getText().toString();
+                        try {
+                            OkHttpClient client = new OkHttpClient();
+
+                            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://mgoeckler.ddns.net/Sew_Projekt/web/api/getjson.php").newBuilder();
+                            urlBuilder.addQueryParameter("func", "signup");
+                            urlBuilder.addQueryParameter("username", username);
+                            urlBuilder.addQueryParameter("mail", email);
+                            urlBuilder.addQueryParameter("password", password);
+                            String url = urlBuilder.build().toString();
+
+                            Request request = new Request.Builder()
+                                    .url(url)
+                                    .build();
+
+                            client.newCall(request).enqueue(new Callback() {
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+                                    String mMessage = e.getMessage().toString();
+                                    Log.w("failure Response", mMessage);
+                                    //call.cancel();
+                                }
+
+                                @Override
+                                public void onResponse(Call call, Response response) throws IOException {
+
+                                    String mMessage = response.body().string();
+                                    if (response.isSuccessful()){
+
+                                        try {
+                                            Log.d("heretestnew", mMessage);
+                                            if(mMessage != "error"){
+                                                onSignupSuccess();
+                                            }else {
+                                                onSignupFailed();
+                                            }
+
+                                        } catch (Exception e){
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         progressDialog.dismiss();
                     }
                 }, 3000);
@@ -81,13 +133,14 @@ public class SignupActivity extends AppCompatActivity {
 
 
     public void onSignupSuccess() {
+        Log.d("heretestnew","onSignupSuccess");
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
         finish();
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Signup failed", Toast.LENGTH_LONG).show();
 
         _signupButton.setEnabled(true);
     }

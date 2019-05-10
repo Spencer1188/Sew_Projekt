@@ -8,6 +8,8 @@ import com.google.zxing.integration.android.IntentResult;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -66,7 +68,31 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             Log.d("click","ok");
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_scan, menu);
+        return true;
+    }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+
+        if (id==R.id.action_website){
+            Intent intent = new Intent(this, WebActivity.class);
+            finish();
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanningResult != null) {
@@ -78,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             try {
                 sendScanData(scanFormat,scanContent);
             } catch (IOException e) {
+                Log.d("testamk","youre here: ERROR msg");
+                formatTxt.setText("" + e.toString());
                 e.printStackTrace();
             }
 
@@ -88,19 +116,21 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     void sendScanData(String id, String name) throws IOException {
-
         OkHttpClient client = new OkHttpClient();
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://mgoeckler.ddns.net/Sew_Projekt/web/api/getjson.php").newBuilder();
+       HttpUrl.Builder urlBuilder = HttpUrl.parse("https://mgoeckler.ddns.net/Sew_Projekt/web/api/getjson.php").newBuilder();
         urlBuilder.addQueryParameter("func", "additem");
-        urlBuilder.addQueryParameter("prefix", id);
-        urlBuilder.addQueryParameter("eantoken", name);
-        urlBuilder.addQueryParameter("usrid", "1");
+            urlBuilder.addQueryParameter("prefix", id);
+            urlBuilder.addQueryParameter("eantoken", name);
+        urlBuilder.addQueryParameter("usrid", "0");
         String url = urlBuilder.build().toString();
+        //String url = "https://mgoeckler.ddns.net/Sew_Projekt/web/api/getjson.php?func=additem&prefix=EAN_13&eantoken=4014400400007&usrid=1";
 
         Request request = new Request.Builder()
                 .url(url)
                 .build();
+        
+
 
     }
 
