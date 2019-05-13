@@ -1,6 +1,7 @@
 <?php
 //Login
 require_once 'dbconfig.php';
+if($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 if(isset($_GET["func"])){
 
@@ -24,11 +25,9 @@ if($_GET["func"] == "additem"){
 	$sql = "INSERT INTO items (usr_id,prefix,token,name,date) VALUES ('$usrid','$prefix','$ean','$productName','$date')";
 
 	if ($conn->query($sql) === TRUE) {
-		$myObj->scan = $dbusr["usr_id"];
-
-		$myJSON = json_encode($myObj);
-
-		
+		$myOb = new \stdClass();
+		$myOb->scan = $productName;
+		$myJSON = json_encode($myOb);
 		echo $myJSON;
 	} else {
 		echo "Error: " . $sql . "<br>" . $conn->error;
@@ -49,18 +48,29 @@ if($_GET["func"] == "additem"){
 		
 	$myObj->uid = $dbusr["usr_id"];
 
-	$myJSON = json_encode($myObj);
+	$JSON = json_encode($myObj);
 
-	echo $myJSON;
+	echo $JSON;
 
 	}
 	else{
 		echo json_encode("error");
 	}
+}else if($_GET["func"]== "changepname"){
+	parse_str(file_get_contents("php://input"),$post_vars);
+    echo $post_vars['Name'];
 }
 	
 }else{
 	echo "Use APi";
+}
+	
+} elseif($_SERVER['REQUEST_METHOD'] == 'PUT') {
+	
+	echo "this is a put request\n";
+    parse_str(file_get_contents("php://input"),$post_vars);
+    echo $post_vars['Name'];
+	
 }
 
 ?>
