@@ -324,7 +324,6 @@ session_start();
 			chartmonth.reset();
 		}
 
-
 		const url = "api/sendjson.php?op=monthbymonth&date="+datem+"&usrid="+usrid;
 			$.ajax({
 				url: url,
@@ -390,6 +389,15 @@ session_start();
 							  data: result[1]
 							}
 						  ]
+						},
+						options: {
+							scales: {
+								yAxes: [{
+									ticks: {
+										beginAtZero: true
+									}
+								}]
+							}
 						}
 					});
 

@@ -6,6 +6,7 @@ if($_GET["type"]=="new"){
 	session_start();
 	$id = $_SESSION["id"];
 	$listid = $_SESSION["last_list_id"];
+	$Type = "New";
 echo "
    <script type=\"text/javascript\"><!--
  	var usrid = \"".$id."\";
@@ -18,6 +19,7 @@ echo "
 	$id = $_SESSION["id"];
 	$listid = $_GET["id"];
 	$_SESSION["last_list_id"] = $listid;
+	$Type = "Edit";
 echo "
    <script type=\"text/javascript\"><!--
  	var usrid = \"".$id."\";
@@ -29,7 +31,7 @@ echo "
 <html>
 <head>
 <meta charset="utf-8">
-<title>Neue Liste</title>
+<title><?php echo $Type;?> Liste</title>
 	<link type="text/css" rel="stylesheet" href="asserts/css/bootstrap.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
@@ -123,7 +125,18 @@ echo "
 	}
 		
 	function closeList(){
-		window.location.href = "buylist.php";
+		
+		$.ajax({
+		  url: "asserts/php/check_act.php?usrid="+usrid,
+		  success: function(data){ 
+			  if(data == "0"){  
+				window.location.href = "buylist.php";
+			  }else{
+				  alert("Es ist bereits eine Liste aktiv!");
+			  }
+		  },
+		  type: "GET"
+		});
 	}
 		
 

@@ -24,7 +24,12 @@ if($_GET["func"] == "additem"){
 	$sql = "INSERT INTO items (usr_id,prefix,token,name,date) VALUES ('$usrid','$prefix','$ean','$productName','$date')";
 
 	if ($conn->query($sql) === TRUE) {
-		echo "New record created successfully";
+		$myObj->scan = $dbusr["usr_id"];
+
+		$myJSON = json_encode($myObj);
+
+		
+		echo $myJSON;
 	} else {
 		echo "Error: " . $sql . "<br>" . $conn->error;
 	}
@@ -41,8 +46,13 @@ if($_GET["func"] == "additem"){
 	$dbusr = mysqli_fetch_array($regusr);
 
 	if($dbusr["password"] == $password_hash){
-			
-		echo json_encode($dbusr["usr_id"]);
+		
+	$myObj->uid = $dbusr["usr_id"];
+
+	$myJSON = json_encode($myObj);
+
+	echo $myJSON;
+
 	}
 	else{
 		echo json_encode("error");

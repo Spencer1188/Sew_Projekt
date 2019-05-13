@@ -46,12 +46,6 @@ echo "
 	window.onload = function () {
   		$("#table-buylist").load('asserts/php/buylist_table.php');
     }
-	function edit(val){
-		$("#myModal").modal();
-		var title = $("#name"+val).text();
-		$("#update_in").val(title);
-		editid = val;
-	}
 
 	function deletelist(val){
 		var url = "asserts/php/delete_buylist.php?val="+val;
@@ -65,18 +59,6 @@ echo "
 		});
 	}
 
-	function safe_changes(){
-		var inp = $("#update_in").val();
-		var url = "asserts/php/update_buylist_title.php?val="+inp+"&id="+editid;
-
-		$.ajax({
-		  url: url,
-		  success: function(data){
-			  $("#table-buylist").load('asserts/php/buylist_table.php');
-		  },
-		  type: "GET"
-		});
-	}
 
 	function open_list(id){
 		window.location.href = "newlist.php?type=edit&id="+id;

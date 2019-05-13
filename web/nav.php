@@ -8,7 +8,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto" >
       <li class="nav-item">
         <a class="nav-link" href="mainface.php">Übersicht
         </a>
