@@ -26,7 +26,13 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $sql = "INSERT INTO items (usr_id,prefix,token,name,date) VALUES ('$usrid','$prefix','$ean','$productName','$date')";
                 if ($conn->query($sql) === TRUE) {
                     $last_id = $conn->insert_id;
-                    $myOb->scan->n = $response->product->name;
+					$myOb = new \stdClass();
+					error_reporting(E_ERROR | E_PARSE);
+					if($productName != ""){
+                    	$myOb->scan->n = $response->product->name;
+					}else{
+						$myOb->scan->n = "NoName";
+					}
                     $myOb->scan->id = (string) $last_id;
                     $myJSON = json_encode($myOb);
                     echo $myJSON;
