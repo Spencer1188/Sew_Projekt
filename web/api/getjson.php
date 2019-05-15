@@ -31,7 +31,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 					if($productName != ""){
                     	$myOb->scan->n = $response->product->name;
 					}else{
-						$myOb->scan->n = "NoName";
+						$id = "0";
+						$arr = array("0"=>"Noname");
+						$myOb->scan->n->$id = "Noname";
 					}
                     $myOb->scan->id = (string) $last_id;
                     $myJSON = json_encode($myOb);
