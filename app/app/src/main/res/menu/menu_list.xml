@@ -1,12 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+    tools:context=".ShopingListActivity">
 
     <item
-        android:id="@+id/action_shopinglist"
-        android:icon="@drawable/list_icon1"
-        android:title="list"
+        android:id="@+id/action_scan"
+        android:icon="@drawable/scan_icon"
+        android:title="scan"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_website"

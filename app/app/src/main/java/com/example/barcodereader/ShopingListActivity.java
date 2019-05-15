@@ -8,22 +8,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 import okhttp3.HttpUrl;
 
-public class WebActivity extends AppCompatActivity{
+public class ShopingListActivity extends AppCompatActivity {
     private Toolbar tb;
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web);
+        setContentView(R.layout.activity_shopinglist);
 
-        WebView mWebView = (WebView) findViewById(R.id.activity_main_webview);
+        WebView mWebView = (WebView) findViewById(R.id.activity_shopinglist_webview);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
+        //anpassen
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://mgoeckler.ddns.net/Sew_Projekt/web/mainface.php").newBuilder();
         urlBuilder.addQueryParameter("sessionid", "0");
         urlBuilder.addQueryParameter("nav", "0");
@@ -35,7 +33,7 @@ public class WebActivity extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu_list, menu);
         return true;
     }
 
@@ -48,21 +46,21 @@ public class WebActivity extends AppCompatActivity{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Toast.makeText(this, "gedrückt!", Toast.LENGTH_LONG).show();
-            return true;
-        }
-        if (id==R.id.action_scan){
-            Intent intent = new Intent(this, MainActivity.class);
+
+        if (id==R.id.action_website){
+            Intent intent = new Intent(this, WebActivity.class);
             finish();
             startActivity(intent);
         }
-        if (id==R.id.action_shopinglist){
-            Intent intent = new Intent(this, ShopingListActivity.class);
+
+        if (id==R.id.action_scan){
+            Intent intent = new Intent(this, MainActivity.class);
             finish();
             startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
