@@ -7,15 +7,7 @@
 	$sql = "SELECT id,item_id,count(*) as anz FROM list_items where usr_id=$id and list_id=$listid group by item_id";
 	$result = $conn->query($sql);
 ?>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-				  <th scope="col">Produktname</th>
-				  <th scope="col">Anzahl</th>
-				  <th scope="col"><i class="fas fa-tools"></i></th>
-				</tr>
-			  </thead>
-			  <tbody>
+
 			<?php
 				  if ($result->num_rows > 0) {
 						// output data of each row
@@ -35,5 +27,3 @@
 				<?php
 						} 
 					  } ?>
-			</tbody>
-		</table>

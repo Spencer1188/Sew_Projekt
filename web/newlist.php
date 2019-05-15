@@ -62,7 +62,18 @@ echo "
 	</div>
 </div>
 	<div class="row">
-		<div id="aktlist" class="col-sm-12 col-lg-6">
+		<div class="col-sm-12 col-lg-6">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+				  <th scope="col">Produktname</th>
+				  <th scope="col">Anzahl</th>
+				  <th scope="col"><i class="fas fa-tools"></i></th>
+				</tr>
+			  </thead>
+			  <tbody  id="aktlist">
+			  </tbody>
+		</table>
 		</div>
 		<div id="alllist" class="col-sm-12 col-lg-6">
 		</div>
@@ -142,19 +153,23 @@ echo "
 
 	
 	function additem(itemid){
-		
+		$("#aktlist").load('asserts/php/preloader.php');
 		$.ajax({
 		  url: "asserts/php/add_item_list.php?usrid="+usrid+"&listid="+aktlist+"&itemid="+itemid,
 		  success: function(data){ 
 			  $("#aktlist").load('asserts/php/aktlist.php');
 		  },
+			error: function(){
+			   alert("error akt list load");
+			   $("#aktlist").load('asserts/php/aktlist.php');
+		   },
 		  type: "GET"
 		});
 		
 	}
 		
 	function deleteitem(itemid){
-		$("#aktlist").load('preloader.php');
+		$("#aktlist").load('asserts/php/preloader.php');
 		$.ajax({
 		  url: "asserts/php/delete_item_list.php?id="+itemid,
 		  success: function(data){
