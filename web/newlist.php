@@ -154,11 +154,16 @@ echo "
 	}
 		
 	function deleteitem(itemid){
+		$("#aktlist").load('preloader.php');
 		$.ajax({
 		  url: "asserts/php/delete_item_list.php?id="+itemid,
 		  success: function(data){
 			  $("#aktlist").load('asserts/php/aktlist.php');
 		  },
+		   error: function(){
+			   alert("error akt list load");
+			   $("#aktlist").load('asserts/php/aktlist.php');
+		   },
 		  type: "GET"
 		});
 		
