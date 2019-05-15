@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">BarcodeReader</string>
     <string name="scan">Scan</string>
-    <string name="menuitem1">Einstellungen</string>
-    <string name="menuitem2">Test</string>
+    <string name="menuitem1">Logout</string>
 </resources>

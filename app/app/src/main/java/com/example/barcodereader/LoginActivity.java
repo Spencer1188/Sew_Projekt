@@ -1,14 +1,8 @@
 package com.example.barcodereader;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -21,11 +15,29 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Headers;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 //https://www.studytutorial.in/android-okhttp-post-and-get-request-tutorial
 public class LoginActivity extends AppCompatActivity {
@@ -34,9 +46,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText _emailText,_passwordText;
     private Button _loginButton;
     private TextView _signupLink;
-    private RequestQueue queue;
-    public String mMessage;
-
 
 
     @Override
@@ -65,8 +74,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
-
-        queue = Volley.newRequestQueue(this);
     }
 
     public void login() {
@@ -94,29 +101,87 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         String email = _emailText.getText().toString();
                         String password = _passwordText.getText().toString();
+                        try {
+                            /*OkHttpClient client = new OkHttpClient();
 
-                        String url = "https://api.myjson.com/bins/kp9wz";
+                            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://mgoeckler.ddns.net/Sew_Projekt/web/api/getjson.php").newBuilder();
+                            urlBuilder.addQueryParameter("func", "login");
+                            urlBuilder.addQueryParameter("mail", email);
+                            urlBuilder.addQueryParameter("password", password);
+                            String url = urlBuilder.build().toString();
 
-                        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                                new Response.Listener<JSONObject>()
-                                {
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        // display response
-                                        Log.d("Response", response.toString());
-                                    }
-                                },
-                                new Response.ErrorListener()
-                                {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Log.d("Error.Response", response);
+                            Request request = new Request.Builder()
+                                    .url(url)
+                                    .build();
+
+                            client.newCall(request).enqueue(new Callback() {
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+                                    mMessage = e.getMessage().toString();
+                                    Log.w("failure Response", mMessage);
+                                    //call.cancel();
+                                }
+
+                                @Override
+                                public void onResponse(Call call, Response response) throws IOException {
+
+                                    mMessage = response.body().string();
+                                    if (response.isSuccessful()){
+
+                                        try {
+
+                                            if(mMessage != "error"){
+                                                onLoginSuccess();
+                                            }else {
+                                                onLoginFailed();
+                                            }
+
+                                        } catch (Exception e){
+                                            e.printStackTrace();
+                                        }
+
                                     }
                                 }
-                        );
+                            });*/
+                            // Instantiate the RequestQueue.
+                            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+                            String url ="https://mgoeckler.ddns.net/Sew_Projekt/web/api/getjson.php?func=login&mail="+email+"&password="+password;
 
-                        queue.add(getRequest);
+                            JsonObjectRequest jsonRequest = new JsonObjectRequest
+                                    (com.android.volley.Request.Method.GET, url, null, new com.android.volley.Response.Listener // CHANGES HERE
+                                            <JSONObject>() {
+                                        @Override
+                                        public void onResponse(JSONObject response) {
+                                            // the response is already constructed as a JSONObject!
+                                            try {
+                                                String uid = response.getString("uid");
+                                                if(uid != null && !uid .isEmpty()){
+                                                    if(uid=="error"){
+                                                        onLoginFailed();
+                                                    }
+                                                    onLoginSuccess(uid);
 
+                                                }
+
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                                onLoginFailed();
+                                            }
+                                        }
+                                    }, new com.android.volley.Response.ErrorListener // CHANGES HERE
+                                            () {
+
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            error.printStackTrace();
+                                            onLoginFailed();
+                                        }
+                                    });
+                            Volley.newRequestQueue(LoginActivity.this).add(jsonRequest);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            onLoginFailed();
+                        }
                         progressDialog.dismiss();
                     }
                 }, 3000);
@@ -141,8 +206,8 @@ public class LoginActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    public void onLoginSuccess() {
-        Toast.makeText(getBaseContext(), "Login success", Toast.LENGTH_LONG).show();
+    public void onLoginSuccess(String uid) {
+        Toast.makeText(getBaseContext(), "Login success" + uid, Toast.LENGTH_LONG).show();
         Log.d("heretestnew","onLoginSuccess");
         Intent intent = new Intent(this, WebActivity.class);
         finish();
@@ -152,8 +217,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed: " + mMessage, Toast.LENGTH_LONG).show();
-
+        Toast.makeText(getBaseContext(), "Login failed:",  Toast.LENGTH_LONG).show();
+        _loginButton.setEnabled(false);
     }
 
     public boolean validate() {
