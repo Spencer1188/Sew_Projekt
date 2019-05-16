@@ -16,22 +16,27 @@
 
     <EditText
         android:id="@+id/pName"
-        android:layout_width="336dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="300dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="116dp"
         android:inputType="text"
+        android:singleLine="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/delete_window"
-        android:layout_width="35dp"
+        android:layout_width="37dp"
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/coral"
         android:onClick="onClickDelete"
         android:text="X"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/pName"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,8 +44,8 @@
         android:id="@+id/pSubmit"
         android:layout_width="99dp"
         android:layout_height="39dp"
-        android:layout_marginStart="252dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="8dp"
         android:onClick="onClickSubmit"
         android:text="submit"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,12 +56,31 @@
         android:layout_width="163dp"
         android:layout_height="105dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="172dp"
         android:layout_marginEnd="8dp"
         android:onClick="onClickScan"
         android:text="Scan"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pName" />
+
+    <TextView
+        android:id="@+id/text_enterProduct"
+        android:layout_width="328dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/primary_dark"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
 </android.support.constraint.ConstraintLayout>
