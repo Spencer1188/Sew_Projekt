@@ -27,7 +27,7 @@
         </activity>
         <activity android:name=".SignupActivity" android:theme="@style/AppTheme.Dark" />
         <activity android:name=".WebActivity"/>
-        <activity android:name=".ShopingListActivity"/>
+        <activity android:name=".ShopingListActivity" android:theme="@style/AppTheme.Dark"/>
     </application>
 
 </manifest>

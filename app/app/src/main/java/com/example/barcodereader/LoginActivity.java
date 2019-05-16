@@ -102,48 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                         String email = _emailText.getText().toString();
                         String password = _passwordText.getText().toString();
                         try {
-                            /*OkHttpClient client = new OkHttpClient();
 
-                            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://mgoeckler.ddns.net/Sew_Projekt/web/api/getjson.php").newBuilder();
-                            urlBuilder.addQueryParameter("func", "login");
-                            urlBuilder.addQueryParameter("mail", email);
-                            urlBuilder.addQueryParameter("password", password);
-                            String url = urlBuilder.build().toString();
-
-                            Request request = new Request.Builder()
-                                    .url(url)
-                                    .build();
-
-                            client.newCall(request).enqueue(new Callback() {
-                                @Override
-                                public void onFailure(Call call, IOException e) {
-                                    mMessage = e.getMessage().toString();
-                                    Log.w("failure Response", mMessage);
-                                    //call.cancel();
-                                }
-
-                                @Override
-                                public void onResponse(Call call, Response response) throws IOException {
-
-                                    mMessage = response.body().string();
-                                    if (response.isSuccessful()){
-
-                                        try {
-
-                                            if(mMessage != "error"){
-                                                onLoginSuccess();
-                                            }else {
-                                                onLoginFailed();
-                                            }
-
-                                        } catch (Exception e){
-                                            e.printStackTrace();
-                                        }
-
-                                    }
-                                }
-                            });*/
-                            // Instantiate the RequestQueue.
                             RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                             String url ="https://mgoeckler.ddns.net/Sew_Projekt/web/api/getjson.php?func=login&mail="+email+"&password="+password;
 
@@ -159,9 +118,15 @@ public class LoginActivity extends AppCompatActivity {
                                                     if(uid=="error"){
                                                         onLoginFailed();
                                                     }
-                                                    onLoginSuccess(uid);
+                                                    else if (uid.isEmpty() || uid==null){
+                                                        onLoginFailed();
+                                                    }
+                                                    else {
+                                                        onLoginSuccess(uid);
+                                                    }
 
                                                 }
+
 
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
@@ -207,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginSuccess(String uid) {
-        Toast.makeText(getBaseContext(), "Login success" + uid, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext(), "Login success" + uid, Toast.LENGTH_LONG).show();
         Log.d("heretestnew","onLoginSuccess");
         Intent intent = new Intent(this, WebActivity.class);
         finish();
@@ -218,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed:",  Toast.LENGTH_LONG).show();
-        _loginButton.setEnabled(false);
+        _loginButton.setEnabled(true);
     }
 
     public boolean validate() {
@@ -241,6 +206,9 @@ public class LoginActivity extends AppCompatActivity {
             _passwordText.setError(null);
         }
 
+        if(!valid){
+            _loginButton.setEnabled(true);
+        }
         return valid;
     }
 

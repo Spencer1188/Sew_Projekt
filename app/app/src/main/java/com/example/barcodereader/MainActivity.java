@@ -1,5 +1,6 @@
 package com.example.barcodereader;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,10 +51,10 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     private Button scanBtn,reloaditems;
-    private TextView formatTxt, contentTxt, productID;
+    private TextView formatTxt, contentTxt, productID,textViewProduct;
     private EditText productName;
     private ListView List;
-    public String productId;
+    public String productId,scanContent,scanFormat;
     private Toolbar tb;
 
     @Override
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         scanBtn = findViewById(R.id.scan_button);
         productName = findViewById(R.id.pName);
-
+        textViewProduct = findViewById(R.id.text_enterProduct);
         tb = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(tb);
      //   scanBtn.setOnClickListener(this);
@@ -86,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
     public void onClickSubmit(View v){
          String s = productName.getText().toString();
        // Toast.makeText(MainActivity.this, "Product Name Changed to: "+ s, Toast.LENGTH_SHORT).show();
-
+        if (productId == "scanFirst"){
+            Toast.makeText(MainActivity.this, "Scannen sie zuerst ein Product um den Namen zu Ändern!", Toast.LENGTH_SHORT).show();
+        }
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         String url = "https://mgoeckler.ddns.net/Sew_Projekt/web/api/getjson.php";
         StringRequest putRequest = new StringRequest(com.android.volley.Request.Method.PUT, url,
@@ -95,7 +98,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(MainActivity.this, "put res: " + response, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "put res: " + response, Toast.LENGTH_SHORT).show();
+                        if(productId != "scanFirst"){
+                        Toast.makeText(MainActivity.this, "product name successfully set to: "+ productName.getText().toString(), Toast.LENGTH_SHORT).show();
+                        }
+                        textViewProduct.setText("Scan a product");
+                        productId = "scanFirst";
                     }
                 },
                 new com.android.volley.Response.ErrorListener()
@@ -115,7 +123,12 @@ public class MainActivity extends AppCompatActivity {
                 String s = productName.getText().toString();
                 //String s2 = productID.getText().toString();
                 params.put("Name", s);
-                params.put("Id", productId);
+                if(productId == null || productId.isEmpty()){
+                    productId = "scanFirst";
+                    return params;
+                }else {
+                    params.put("Id", productId);
+                }
                 return params;
             }
         };
@@ -158,11 +171,11 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanningResult != null) {
-          String scanContent = scanningResult.getContents();
-          String scanFormat = scanningResult.getFormatName();
+          scanContent = scanningResult.getContents();
+          scanFormat = scanningResult.getFormatName();
 
             try {
-                sendScanData(scanFormat,scanContent);
+                sendScanData();
             } catch (IOException e) {
                 Log.d("testamk","youre here: ERROR msg");
                 formatTxt.setText("" + e.toString());
@@ -175,59 +188,84 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void sendScanData(String id, String name) throws IOException {
-        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-        String url ="https://mgoeckler.ddns.net/Sew_Projekt/web/api/getjson.php?func=additem&prefix="+id+"&eantoken="+name+"&usrid"+"0";
+    void sendScanData() throws IOException {
+        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this,
+                R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Item wird gespeichert...");
+        progressDialog.show();
+
         //String url ="https://mgoeckler.ddns.net/Sew_Projekt/web/api/getjson.php?func=additem&prefix=%22EAN_8%22&eantoken=12093809&usrid=0";
-        JsonObjectRequest jsonRequest = new JsonObjectRequest
-                (com.android.volley.Request.Method.GET, url, null, new com.android.volley.Response.Listener // CHANGES HERE
-                        <JSONObject>() {
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        // the response is already constructed as a JSONObject!
-                        try {
+                    public void run() {
+                        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+                        String url = "https://mgoeckler.ddns.net/Sew_Projekt/web/api/getjson.php?func=additem&prefix=" + scanFormat+ "&eantoken=" + scanContent + "&usrid" + "0";
+                        JsonObjectRequest jsonRequest = new JsonObjectRequest
+                                (com.android.volley.Request.Method.GET, url, null, new com.android.volley.Response.Listener // CHANGES HERE
+                                        <JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        // the response is already constructed as a JSONObject!
+                                        try {
 
-                            String scan = response.getJSONObject("scan").getJSONObject("n").getString("0");
-                            productId = response.getJSONObject("scan").getString("id");
+                                            String scan = response.getJSONObject("scan").getJSONObject("n").getString("0");
+                                            productId = response.getJSONObject("scan").getString("id");
 
-                            if(scan != null && !scan .isEmpty()){
-                                if(scan == "error"){
-                                    scanFailed();
-                                }else {
-                                    scanWorked(scan);
-                                }
-                            }
+                                            if (scan != null && !scan.isEmpty()) {
+                                                if (scan == "error") {
+                                                    scanFailed();
+                                                } else {
+                                                    textViewProduct.setText("Change product text now!");
 
-                        } catch (JSONException e) {
-                            Toast.makeText(MainActivity.this, "scan error: "+ e.toString(), Toast.LENGTH_SHORT).show();
-                        }
+                                                    scanWorked(scan);
+                                                }
+                                            }
+                                            if (scan == "noname") {
+                                                textViewProduct.setText("Name the product you just scaned.");
+                                                productName.setHint("Change name here:");
+                                                scanWorked(scan);
+                                            }
+
+                                        } catch (JSONException e) {
+                                            textViewProduct.setText("Name the product you just scaned.");
+                                            productName.setHint("Change name here!");
+                                        }
+                                    }
+                                }, new com.android.volley.Response.ErrorListener // CHANGES HERE
+                                        () {
+
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Toast.makeText(MainActivity.this, "volley error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                        jsonRequest.setRetryPolicy(new
+
+                                                           RetryPolicy() {
+                                                               @Override
+                                                               public int getCurrentTimeout () {
+                                                                   return 50000;
+                                                               }
+
+                                                               @Override
+                                                               public int getCurrentRetryCount () {
+                                                                   return 50000;
+                                                               }
+
+                                                               @Override
+                                                               public void retry (VolleyError error) throws VolleyError {
+
+                                                               }
+                                                           });
+                        queue.add(jsonRequest);
+                        progressDialog.dismiss();
                     }
-                }, new com.android.volley.Response.ErrorListener // CHANGES HERE
-                        () {
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this, "volley error: "+ error.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-        jsonRequest.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {
-                return 50000;
-            }
-
-            @Override
-            public int getCurrentRetryCount() {
-                return 50000;
-            }
-
-            @Override
-            public void retry(VolleyError error) throws VolleyError {
-
-            }
-        });
-        queue.add(jsonRequest);
-
+    }, 10000);
     }
     private void scanWorked(String scan) {
         Toast.makeText(this, scan + "has been added", Toast.LENGTH_LONG).show();
