@@ -72,19 +72,22 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
             $result = $conn->query($sql);
             $list = array();
 
+					error_reporting(E_ERROR | E_PARSE);
             if ($result->num_rows > 0) {
                 // output data of each row
+				$i=0;
                 while($row = $result->fetch_assoc()) {
-                    $arr->name = $row["name"];
-                    $arr->anzahl = (string) $row["anz"];
-                    array_push($list,$arr);
+                    $arr[$i]->name = $row["name"];
+                    $arr[$i]->anzahl = (string) $row["anz"];
+					$i++;
                 }
             } else {
-                $arr->error = "0 Result";
+                $arr->name = "0 Result";
                 array_push($list,$arr);
             }
 
-            echo json_encode($list);
+			$emp = array("list" => $arr);
+            echo json_encode($emp);
         }
 
     }else{

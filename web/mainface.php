@@ -15,11 +15,11 @@ session_start();
 			die("Error");
 		}
 		$id = $_SESSION["id"];
-	echo "
-	   <script type=\"text/javascript\"><!--
-		var usrid = \"".$id."\";
-	   </script>
-	 ";
+		echo "
+		   <script type=\"text/javascript\"><!--
+			var usrid = \"".$id."\";
+		   </script>
+		 ";
 	}
 ?>
 <html><head>
